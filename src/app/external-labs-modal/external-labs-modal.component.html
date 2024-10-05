@@ -1,0 +1,208 @@
+<div [ngStyle]="{'width.px': popupWidth}">
+  <div class="dialog-header-container">
+    <div class="dialog-header">
+      <div class="ds-brand-wrapper --medium">
+        |<img src="https://ds.cdn.questdiagnostics.com/assets/img/qd-brand--horizontal--green.svg" />
+      </div>
+      <div mat-dialog-header class="ds-modal_header ds-col-12 ds-flex --end-center">
+        <button mat-button [mat-dialog-close]="true" class="ds-icon--close ds-font--20 ds-green_500"
+          aria-label="close"></button>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!loader && (orders.length > 0 || limitOrders.length > 0)">
+    <mat-dialog-content class="ds-col-12 dialog-content">
+      <h2 class="test-heading">Test needing attention</h2>
+      <p *ngIf="price >100 && !limitOrders.length" class="lcp-text">{{LCP_Text}}</p>
+      <p *ngIf="price <100 && !limitOrders.length" class="lcp-text">No test need attention</p>
+      <div class="dialog-container" *ngIf="!((price >100 && !limitOrders.length)||(price >100 && !limitOrders.length))">
+        <ng-container *ngFor="let order of limitOrders; let i=index;">
+          <ng-container *ngIf="!limitOrders[i].frequencyLimit && limitOrders[i].coveredByDiagnosis && !limitOrders[i].diagnosisDisplayIndicator;">
+            <div class="diagnosis-details ds--flex">
+              <div class="diagnosis-header">
+                <h2 class="label-heading">{{limitOrders[i].text}}</h2>
+                <h2 class="body-base ds-display-2 label-heading">{{limitOrders[i].price}}</h2>
+              </div>
+             <div class="limitOrders[i].frequencyLimit ? 'frequencyLimit' : 'lcp-bg-color'">
+                <div class="ds--flex --start--start">
+                  <ng-container *ngIf="!limitOrders[i].frequencyLimit">
+                    <span class="ds-icon--alert ds-black ds-font--24 alert-icon" aria-label="alert"></span>
+                    <div>
+                      <p class="ds-font--14 alert-text">
+                        Selected diagnoses do not satisfy the health plans Limited Coverage Policy.
+                      </p>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container
+            *ngIf="!limitOrders[i].frequencyLimit && limitOrders[i].coveredByDiagnosis && limitOrders[i].diagnosisDisplayIndicator;">
+            <div class="diagnosis-details ds--flex">
+              <div class="diagnosis-header">
+                <h2 class="label-heading">{{limitOrders[i].text}}</h2>
+                <h2 class="body-base ds-display-2 label-heading">{{limitOrders[i].price}}</h2>
+              </div>
+
+              <div class="limitOrders[i].frequencyLimit ? 'frequencyLimit' : 'lcp-bg-color'">
+                <div class="ds--flex --start--start">
+                  <ng-container *ngIf="!limitOrders[i].frequencyLimit">
+                    <span class="ds-icon--alert ds-black ds-font--24 alert-icon" aria-label="alert"></span>
+                    <div>
+                      <p class="ds-font--14 alert-text">
+                        Selected diagnoses do not satisfy the health plans Limited Coverage Policy.
+                      </p>
+                      <div class="diagnoses-codes" *ngIf="limitOrders[i].display !== ''">
+                        <ng-container *ngIf="!limitOrders[i]?.chems && !limitOrders[i]?.chems?.length">
+                          <span class="order-text">{{limitOrders[i].display.split('-')[0]}}</span>
+                          <span class="order-text">{{limitOrders[i].display.split('-')[1]}}</span>
+                        </ng-container>
+                        <ng-container *ngIf="limitOrders[i]?.chems && limitOrders[i]?.chems?.length>0">
+                          <ng-container *ngFor="let chem of limitOrders[i]?.chems">
+                            <div class="flex-class">
+                              <span class="order-name">{{chem.name}}</span>
+                              <span class="order-text">{{chem.text}}</span>
+                              <span class="order-text">{{chem.code}}</span>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                      <div class="diagnoses-codes" *ngIf="limitOrders[i].display !== ''">
+                        <span class="order-text">No associated diagnosis codes found</span>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container
+            *ngIf="!limitOrders[i].frequencyLimit && !limitOrders[i].coveredByDiagnosis && (limitOrders[i].diagnosisDisplayIndicator || !limitOrders[i].diagnosisDisplayIndicator);">
+            <p class="lcp-text">No test need attention</p>
+          </ng-container>
+          <ng-container
+            *ngIf="!limitOrders[i].frequencyLimit && limitOrders[i].coveredByDiagnosis && (limitOrders[i].diagnosisDisplayIndicator || !limitOrders[i].diagnosisDisplayIndicator);">
+            <div class="diagnosis-details ds--flex">
+              <div class="diagnosis-header">
+                <h2 class="label-heading">{{limitOrders[i].text}}</h2>
+                <h2 class="body-base ds-display-2 label-heading">{{limitOrders[i].price}}</h2>
+              </div>
+              <div class="limitOrders[i].frequencyLimit ? 'frequencyLimit' : 'lcp-bg-color'">
+                <div class="ds--flex --start--start">
+                  <ng-container *ngIf="limitOrders[i].frequencyLimit">
+                    <span class="ds-icon--info ds-mr-8 ds-blue ds-font--24" aria-label="info"></span>
+                    <span class="ds-font--14 alert-text">
+                      The patient's health plan indicates a frequency limit
+                    </span>
+                  </ng-container>
+                </div>
+              </div>
+              <div [class]="'lcp-bg-color'">
+                <div class="ds--flex --start--start">
+                  <ng-container *ngIf="limitOrders[i].frequencyLimit">
+                    <span class="ds-icon--alert ds-black ds-font--24 alert-icon" aria-label="alert"></span>
+                    <div>
+                      <p class="ds-font--14 alert-text">
+                        Selected diagnoses do not satisfy the health plans Limited Coverage Policy.
+                      </p>
+                      <ng-container *ngIf="limitOrders[i].diagnosisDisplayIndicator">
+                        <div class="diagnoses-codes" *ngIf="limitOrders?.[i]?.display !== ''">
+                          <ng-container *ngIf="!limitOrders[i]?.chems && !limitOrders[i]?.chems?.length">
+                            <span class="order-text">{{limitOrders[i].display.split('-')[0]}}</span>
+                            <span class="order-text">{{limitOrders[i].display.split('-')[1]}}</span>
+                          </ng-container>
+                          <ng-container *ngIf="limitOrders[i]?.chems && limitOrders[i]?.chems?.length>0">
+                            <ng-container *ngFor="let chem of limitOrders[i]?.chems">
+                              <div class="flex-class">
+                                <span class="order-name">{{chem.name}}</span>
+                                <span class="order-text">{{chem.text}}</span>
+                                <span class="order-text">{{chem.code}}</span>
+                              </div>
+                            </ng-container>
+                          </ng-container>
+                        </div>
+                        <div class="diagnoses-codes" *ngIf="limitOrders[i].display === ''">
+                          <span class="order-text">No associated diagnosis codes found</span>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+      <h2 class="test-heading">Other tests</h2>
+      <div class="dialog-container">
+        <ng-container *ngIf="orders.length>0">
+          <div class="diagnosis-details" *ngFor="let order of orders; let i=index;">
+            <div class="diagnosis-header">
+              <h2 class="label-heading">{{order.text}}</h2>
+              <h2 class="body-base ds-display-2 label-heading">{{order.price}}</h2>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container>
+          <div class="diagnoses-codes" *ngIf="!orders.length">
+            <span>There are no tests in this section.</span>
+          </div>
+        </ng-container>
+      </div>
+    </mat-dialog-content>
+
+    <div class="diagnosis-details diagnoses-estimated-price">
+      <div class="diagnosis-header">
+        <ng-container *ngIf="noPrice.length===0">
+          <h2>Total estimated patient pricing</h2>
+          <h2 class="price-text">{{finalPrice}}</h2>
+        </ng-container>
+        <ng-container *ngIf="noPrice.length>0">
+          <h2>
+            {{noPrice}}
+          </h2>
+        </ng-container>
+      </div>
+    </div>
+
+    <span class="dialog-text ds-gray___600 ds-flex ds-body-small --center-center ">
+      The amounts above are estimates of patient responsibility based on a number of factors including, but
+      not
+      limited to, contracted rates, claims experience and benefit design. Patients will receive a bill from
+      Quest for the
+      amount
+      owed by the patient.
+    </span>
+
+    <mat-dialog-actions class="ds-col-12">
+      <div class="ds-modal___actions ds-col-12 ds-flex --end-center">
+        <button mat-button [mat-dialog-close]="true" class="ds-button --primary --mediμm" aria-label="Continue">
+          Sign order
+        </button>
+      </div>
+    </mat-dialog-actions>
+  </ng-container>
+
+  <ng-container *ngIf="(loader && !orders.length) ||(loader && !limitOrders.length)">
+    <h1 class="ds--flex --center-center">Loading...</h1>
+  </ng-container>
+
+  <ng-container *ngIf="(!loader && error.length>0)">
+    <div class="empty-text">
+      <h2 class="error-header">
+        Pricing and coverage information unavailable
+      </h2>
+      <span class="error-text">
+        We're currently unable to provide cost estimates and insurance coverage details
+      </span>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!error.length && !loader && (!orders.length && !limitOrders.length)">
+    <span class="empty-text ds-flex --center-center">No Active Orders.</span>
+  </ng-container>
+</div>

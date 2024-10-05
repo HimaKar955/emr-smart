@@ -1,0 +1,189 @@
+.dialog-header-container {
+    padding: 1rem;
+
+    .dialog-header {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid lightgrey;
+        padding-bottom: 1rem;
+    }
+}
+
+.diagnosis-header {
+    display: flex;
+    justify-content: space-between;
+
+    .label-heading {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 25.6px;
+        color: black;
+        margin: 0 !important;
+
+        &:nth-child(2) {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+    }
+
+    .price-text {
+        margin-left: 2.5rem;
+    }
+}
+
+.alert-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25.6px;
+    color: #151515;
+    margin-bottom: 0.5rem;
+}
+
+.error-header {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 32px;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.error-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25.6px;
+    text-align: left;
+}
+
+.alert-icon {
+    &::before {
+        color: #E00028;
+        margin-right: 1rem;
+    }
+}
+
+.dialog-content {
+    padding: 0;
+    margin: Orem 1rem 0.5rem 1rem;
+    max-height: 350px;
+
+    .test-heading {
+        margin: 0.5rem 0;
+        font-weight: 700;
+        line-height: 32px;
+    }
+
+    .lcp-text {
+        color: black;
+    }
+
+    .dialog-container {
+        border: 1px solid lightgrey;
+        border-radius: 0.5rem;
+
+        .diagnosis-details {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid lightgrey;
+            padding: 0.625rem;
+
+            @extend .diagnosis-header;
+
+            .frequency-limit {
+                background: #F9FBFE;
+                border: 1px solid #2769DD;
+                padding: 1rem;
+                border-radius: 0.25rem;
+
+                @extend .alert-text;
+                @extend .alert-icon;
+            }
+
+            .lcp-bg-color {
+                background: #FFFCFC;
+                border: 1px solid #E00028;
+                border-radius: 0.25rem;
+                padding: 1rem;
+
+                @extend .alert-text;
+                @extend .alert-icon;
+            }
+
+            .diagnosis-codes {
+                .order-text {
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 25.6px;
+                }
+
+                .order-name {
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 25.6px;
+                    margin-left: 0 !important;
+                }
+
+                .flex-class {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 0.5rem;
+
+                    @extend .order-text;
+                    @extend .order-name;
+                }
+
+                span {
+                    color: black;
+
+                    &:nth-child(2) {
+                        margin-left: 1.5rem;
+                    }
+                }
+            }
+
+            .diagnosis-review-button {
+                margin-top: 0.8гem;
+                margin-left: 2.5rem;
+            }
+        }
+    }
+}
+
+.diagnosis-estimated-price {
+    background-color: #FAFAFA;
+    padding: 0.54rem;
+    margin: 1.25rem 1rem 1.25rem 1rem;
+    border: none;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 70px;
+
+    @extend .diagnosis-header;
+}
+
+.dialog-text {
+    padding: 0 1rem 0 1rem;
+    font-size: 0.875rem;
+    line-height: 154%;
+}
+
+h2 {
+    margin: 0;
+    color: black;
+}
+
+.empty-text {
+    padding: 0 1rem 1rem 1rem;
+}
+
+::ng-deep .ds-modal_header {
+    right: 12px;
+}
+
+::ng-deep .ds-modal_actions {
+    padding: 0 12px 12px;
+}
+
+.mat-button {
+    margin-right: 1rem;
+}

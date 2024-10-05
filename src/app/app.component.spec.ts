@@ -1,29 +1,45 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { provideHttpClientTesting } from '@angular/common/http/testing'
+import { of } from 'rxjs';
+import { ExternalLabsModalComponent } from './external-labs-modal/external-labs-modal.component';
+import { EmrService } from './emr-services/emr-service/emr.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+
+
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppComponent],
-    }).compileComponents();
-  });
+    let fixture: ComponentFixture<AppComponent>;
+    let component: AppComponent;
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+    const mockData = {
+        getToken(val1: any) { return of({ responseData: {} }) }
+    }
 
-  it(`should have the 'emr-smart' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('emr-smart');
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+    imports: [AppComponent, ExternalLabsModalComponent],
+    providers: [
+        {
+            provide: EmrService, useValue: mockData
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, emr-smart');
-  });
+        fixture = TestBed.createComponent(AppComponent);
+        component = fixture.componentInstance;
+        component.authToken = '123';
+        fixture.detectChanges();
+    });
+
+
+
+    it('should call launchDialog()', () => {
+        component.launchDialog({ auth_token: 'mock token' })
+
+        expect(component).toBeTruthy();
+    });
 });
+
