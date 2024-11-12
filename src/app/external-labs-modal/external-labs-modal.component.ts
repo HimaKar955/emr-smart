@@ -1,33 +1,27 @@
-import { Component, HostListener, Inject, OnInit } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, HostListener, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { EmrService } from '../emr-services/emr-service/emr.service';
-import { HttpClient } from '@angular/common/http';
-import { LCP_Text, PricingResponse1, ServiceResponse1 } from '../data/utils';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { LCP_Text, PricingResponse1, PricingResponse2, PricingResponse3, PricingResponse4, PricingResponse5, PricingResponse6, PricingResponse7, ServiceResponse1, ServiceResponse2, ServiceResponse3, ServiceResponse4, ServiceResponse5, ServiceResponse6, ServiceResponse7 } from '../data/utils';
 import { environment } from '../../environments/environment';
 
 
 
-
 @Component({
-
   selector: 'app-external-labs-modal',
   standalone: true,
-  imports: [
-// TODO: `HttpClientModule` should not be imported into a component directly.
-// Please refactor the code to add `provideHttpClient()` call to the provider list in the
-// application bootstrap logic and remove the `HttpClientModule` import from this component.
- CommonModule, MatDividerModule, FormsModule, MatIconModule, MatDialogModule],
+  imports: [CommonModule, MatDividerModule, FormsModule, MatIconModule, MatDialogModule, HttpClientModule],
   providers: [EmrService, HttpClient],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './external-labs-modal.component.html',
   styleUrl: './external-labs-modal.component.scss'
 })
-
 export class ExternalLabsModalComponent implements OnInit {
-  popupWidth: number = 650;
+  popupWidth: number = 750;
   orders: any[] = [];
   limitOrders: any[] = [];
   loader = false;
@@ -37,7 +31,7 @@ export class ExternalLabsModalComponent implements OnInit {
   error: any[] = [];
   price: number = 0;
   noPrice: string = '';
-
+  showPricing = true;
 
   constructor(private emrService: EmrService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -49,6 +43,7 @@ export class ExternalLabsModalComponent implements OnInit {
       this.setPopupWidth(window.innerWidth);
     }
   }
+
   @HostListener('window: resize', ['$event'])
   onResize(event: any) {
     this.setPopupWidth(event.target.innerWidth)
@@ -56,15 +51,12 @@ export class ExternalLabsModalComponent implements OnInit {
 
   setPopupWidth(width: number) {
     if (width <= 768) {
-      this.popupWidth = 550
+      this.popupWidth = 650
     } else if (width <= 1024) {
-      this.popupWidth = 650;
-    } else {
       this.popupWidth = 750;
     }
   }
 
-  // to filter the lab orders based on category and active status
   // istanbul ignore next
   getServiceRequestData() {
     this.loader = true;
@@ -74,11 +66,10 @@ export class ExternalLabsModalComponent implements OnInit {
       "resource_type": "ServiceRequest"
     };
 
-    return this.emrService.post(payload, environment.cds_hook_Service_request_url)
+    // return this.emrService.post(payload, environment.cds_hook_Service_request_url)
 
-      // return this.emrService.post(payload, environment.cds_hook_Service_request_url)
-      .subscribe((res: any) => {
-        let response = ServiceResponse1 as any;
+      // .subscribe((response: any) => {
+        let response = ServiceResponse7 as any;
         console.log(response, 'ServiceRequest Response');
         let codes: any[] = [];
         let ServiceRequests = response?.responseData?.ServiceRequest;
@@ -88,14 +79,14 @@ export class ExternalLabsModalComponent implements OnInit {
             const orders: any[] = [];
             let orderCodes: any[] = [];
 
-            console.log("Item reasonCode:", item?.reasonCode);
+            console.log("Item:", item);
 
 
             if (item?.reasonCode && Array.isArray(item.reasonCode) && item.reasonCode.length > 0) {
               const icd10Code = item.reasonCode[0].coding?.find((code: any) => code.system === "http://h17.org/fhir/sid/icd-10-cm");
               if (icd10Code) {
                 obj.code = icd10Code.code;
-                obj.display = item.resource.reasonCode[0].text || '';
+                obj.display = item.reasonCode[0].text || '';
               }
             }
             orders.push(obj);
@@ -134,13 +125,13 @@ export class ExternalLabsModalComponent implements OnInit {
           console.warn('no codes to send to getPricingData');
           this.loader = false;
         }
-      },
+      // },
         (e: any) => {
           this.loader = false;
           console.log(e);
           this.error = e?.error?.responseData?.errorMessage || 'something went wrong'
         }
-      );
+      // );
   }
 
 
@@ -150,9 +141,10 @@ export class ExternalLabsModalComponent implements OnInit {
       "cds_hook_id": this.hookInstance,
     }
 
-    this.emrService.post(payload, environment.cds_hook_pricing_url)
-      .subscribe((res: any) => {
-        let data=PricingResponse1 as any;
+    // this.emrService.post(payload, environment.cds_hook_pricing_url)
+      // .subscribe((res: any) => {
+        let data=PricingResponse7 as any;
+        // let data= res;
         console.log(data, 'Pricingres');
         const responseData = data.responseData.elabs_response_payload;
         const ChemsData: any[] = [];
@@ -243,8 +235,8 @@ export class ExternalLabsModalComponent implements OnInit {
         });
         console.log(this.limitOrders, this.orders);
 
-        this.limitOrders = this.getOrderData(this.limitOrders, ChemsData, ChemServiceName);
-        this.orders = this.getOrderData(this.orders, ChemsData, ChemServiceName);
+        this.limitOrders = this.getOrderData(this.limitOrders, ChemsData, ChemServiceName, limitedCoverage);
+        this.orders = this.getOrderData(this.orders, ChemsData, ChemServiceName, limitedCoverage);
         console.log(this.limitOrders, this.orders);
 
         (this.orders.length > 0 || this.limitOrders.length > 0) && [...this.orders, ...this.limitOrders].map((order: any) => {
@@ -261,10 +253,10 @@ export class ExternalLabsModalComponent implements OnInit {
         });
         this.finalPrice = '$' + `${this.price}`
         this.loader = false;
-      })
+      // })
   }
 
-  getOrderData(orders: any, ChemsData: any, ChemServiceName: string) {
+  getOrderData(orders: any, ChemsData: any, ChemServiceName: string, limitedCoverage: any) {
     const lcporders: any = [];
     const lcpData: any = []
     console.log(orders);
@@ -275,7 +267,7 @@ export class ExternalLabsModalComponent implements OnInit {
       })
       console.log(chemData, ChemsData, data)
 
-      if (data.isChem) {
+      if (data.isChem&& limitedCoverage.length >0 ? limitedCoverage.some((chem:any) => chem.orderCode === data.orderCode) : true) {
         const obj = {
           name: '',
           text: '',
@@ -309,7 +301,7 @@ export class ExternalLabsModalComponent implements OnInit {
       if (item?.text?.includes(',')) {
         if (map.has(item.text)) {
           const existingItem = map.get(item.text);
-          existingItem.display += ` ${item.display}-${item.code}`;
+          existingItem.display += `, ${item.display}-${item.code}`;
         }
         else {
           map.set(item.text, { ...item, display: item.display && item.code ? `${item.display}-${item.code}` : '' });
@@ -325,7 +317,8 @@ export class ExternalLabsModalComponent implements OnInit {
     for (const value of map.values()) {
       result.push({
         text: value.text,
-        display: value.display.split(', -').join(''), code: value.code,
+        display: value.display.split(', -').join(''), 
+        code: value.code,
         price: Number(value.price).toFixed(2),
         orderCode: value.orderCode,
         isChem: value.isChem
@@ -370,6 +363,9 @@ export class ExternalLabsModalComponent implements OnInit {
       }
     };
     return (array);
+  }
+  onReview(){
+    this.showPricing =false;
   }
 }
 

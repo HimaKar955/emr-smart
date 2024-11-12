@@ -1,5 +1,5 @@
 .dialog-header-container {
-    padding: 1rem;
+    padding: 24px;
 
     .dialog-header {
         display: flex;
@@ -9,19 +9,27 @@
     }
 }
 
+::ng-deep .mat-mdc-dialog-container-with-actions .mat-mdc-dialog-content{
+    padding: var(--mat-dialog-with-actions-content-padding, 0 24px);
+    padding-top: 0px;
+}
+
+.dialog {
+    padding: 24px;
+}
+
 .diagnosis-header {
     display: flex;
     justify-content: space-between;
 
     .label-heading {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 700;
-        line-height: 25.6px;
+        line-height: 27.54px;
         color: black;
-        margin: 0 !important;
 
         &:nth-child(2) {
-            font-size: 1rem;
+            font-size: 18px;
             font-weight: 500;
         }
     }
@@ -31,12 +39,38 @@
     }
 }
 
+.order-text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 25.6px;
+}
+
+.order-name {
+    font-size: 16px;
+    font-weight: 700;
+    line-height:25.6px;
+    margin-left: 0 !important;
+}
+
+.flex-class {
+    display: flex;
+    gap:24px;
+    margin-top: 0.5rem;
+    
+    @extend .order-text;
+    @extend .order-name;
+}
+
 .alert-text {
     font-size: 16px;
     font-weight: 400;
     line-height: 25.6px;
     color: #151515;
-    margin-bottom: 0.5rem;
+    margin-bottom: 4px;
+}
+
+.alert-text+.order-text {
+    margin-top: 4px;
 }
 
 .error-header {
@@ -62,12 +96,12 @@
 }
 
 .dialog-content {
-    padding: 0;
-    margin: Orem 1rem 0.5rem 1rem;
+    border-radius: 8px;
+    margin-top: 0;
     max-height: 350px;
 
     .test-heading {
-        margin: 0.5rem 0;
+        margin-bottom: 8px;
         font-weight: 700;
         line-height: 32px;
     }
@@ -76,15 +110,30 @@
         color: black;
     }
 
+    .no-border{
+        border: none !important;
+        color: #151515;
+        font-family: Roboto;
+        font-size: 16px;
+        font-weight:400;
+        line-height:25.6px;
+        text-align:left;
+    }
+
     .dialog-container {
-        border: 1px solid lightgrey;
-        border-radius: 0.5rem;
+        border: 1px solid #d1d1d1;
+        border-radius: 8px;
+        margin: 0 !important;
 
         .diagnosis-details {
             display: flex;
             flex-direction: column;
             border-bottom: 1px solid lightgrey;
-            padding: 0.625rem;
+            padding: 16px;
+
+            &:last-child {
+                border-bottom: none;
+            }
 
             @extend .diagnosis-header;
 
@@ -93,6 +142,7 @@
                 border: 1px solid #2769DD;
                 padding: 1rem;
                 border-radius: 0.25rem;
+                margin-top: 8px;
 
                 @extend .alert-text;
                 @extend .alert-icon;
@@ -103,39 +153,18 @@
                 border: 1px solid #E00028;
                 border-radius: 0.25rem;
                 padding: 1rem;
+                margin-top: 8px;
 
                 @extend .alert-text;
                 @extend .alert-icon;
             }
 
             .diagnosis-codes {
-                .order-text {
-                    font-weight: 500;
-                    font-size: 16px;
-                    line-height: 25.6px;
-                }
-
-                .order-name {
-                    font-size: 16px;
-                    font-weight: 700;
-                    line-height: 25.6px;
-                    margin-left: 0 !important;
-                }
-
-                .flex-class {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-top: 0.5rem;
-
-                    @extend .order-text;
-                    @extend .order-name;
-                }
-
                 span {
-                    color: black;
+                    // color: black;
 
                     &:nth-child(2) {
-                        margin-left: 1.5rem;
+                        margin-left: 24px;
                     }
                 }
             }
@@ -148,21 +177,62 @@
     }
 }
 
+.photo-section{
+    box-shadow: 0px -4px 4px -2px #18274B0f;
+}
+
+.review-button {
+    padding:6px 16px 6px 16px;
+    border-radius: 4px;
+    border:1px solid #35792A;
+    background: #fff;
+    margin-top: 8px;
+
+    &:hover {
+        .button-text {
+            color:#fff;
+        }
+    }
+
+    .button-text {
+        font-size: 16px;
+        font-weight:700;
+        line-height: 18px;
+        letter-spacing: -0.01em;
+        text-align: center;
+        color: #35792A;
+    }
+}
+
+.total-section {
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 700;
+    padding-top: 24px;
+    line-height: 32px;
+    text-align: left;
+    border-radius: 0px 0px 8px 8px;
+    box-shadow: 0px -4px 4px -2px rgba(24,39,75,0.06), 0px -4px 4px -2px rgba(24,39,75,0.06);
+    padding-left:24px;
+}
+
 .diagnosis-estimated-price {
     background-color: #FAFAFA;
-    padding: 0.54rem;
-    margin: 1.25rem 1rem 1.25rem 1rem;
-    border: none;
+    padding: 16px;
+    margin: 24px;
+    border: 1px solid #D1D1D1;
+    border-radius: 8px;
     display: flex;
     justify-content: end;
     align-items: center;
     height: 70px;
+    margin-top: 8px;
 
     @extend .diagnosis-header;
 }
 
 .dialog-text {
-    padding: 0 1rem 0 1rem;
+    padding: 0 24px;
     font-size: 0.875rem;
     line-height: 154%;
 }
@@ -181,9 +251,9 @@ h2 {
 }
 
 ::ng-deep .ds-modal_actions {
-    padding: 0 12px 12px;
+    padding: 0 16px 16px;
 }
 
 .mat-button {
-    margin-right: 1rem;
+    margin: 24px;
 }
