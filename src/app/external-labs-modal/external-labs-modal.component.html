@@ -34,7 +34,7 @@
                       <span class="ds-icon--alert ds-black ds-font--24 alert-icon" aria-label="alert"></span>
                       <div>
                         <p class="ds-font--14 alert-text">
-                          Selected diagnoses do not satisfy the health plan's Limited Coverage Policy.
+                          Selected diagnoses do not satisfy the health plan's Limited Coverage Policy. step 1 11
                         </p>
                       </div>
                     </ng-container>
@@ -49,20 +49,17 @@
                   <h2 class="label-heading">{{limitOrders[i].text}}</h2>
                   <h2 class="body-base ds-display-2 label-heading">{{limitOrders[i].price}}step2</h2>
                 </div>
-                <!-- <ng-container *ngFor="let chem of limitOrders[0].chems"> -->
-                  <!-- <div class="diagnosis-sub-header">
-                    <h2 class="label-heading">{{chem.name}}</h2>
-                  </div> -->
                   <div [class]="limitOrders[i].frequencyLimit ? 'frequency-limit': 'lcp-bg-color'">
                     <div class="ds-flex --start-start">
                       <ng-container *ngIf="!limitOrders[i].frequencyLimit">
                         <span class="ds-icon--alert ds-black ds-font--24 alert-icon" aria-label="alert"></span>
                         <div>
                           <p class="ds-font--14 alert-text">
-                            Selected diagnoses do not satisfy the health plan's Limited Coverage Policy.
+                            Selected diagnoses do not satisfy the health plan's Limited Coverage Policy. step 2
                           </p>
                           <div class="diagnosis-codes" *ngIf="limitOrders[i].display !== ''">
                             <ng-container *ngIf="!limitOrders[i]?.chems && !limitOrders[i]?.chems?.length">
+                              step-2-0.3
                               <span class="order-text">{{limitOrders[i].display.split('-')[0]}}</span>
                               <span class="order-text">{{limitOrders[i].display.split('-')[1]}}</span>
                             </ng-container>
@@ -103,7 +100,7 @@
                     <ng-container *ngIf="limitOrders[i].frequencyLimit">
                       <span class="ds-icon--info ds-mr-8 ds-blue ds-font--24" aria-label="info"></span>
                       <span class="ds-font--14 alert-text">
-                        The patient's health plan indicates a frequency limit on coverage for this test.
+                        The patient's health plan indicates a frequency limit on coverage for this test. step-3
                         If
                         exceeded, the patient may be financially liable.
                       </span>
@@ -121,62 +118,65 @@
               <div class="diagnosis-details ds--flex">
                 <div class="diagnosis-header">
                   <h2 class="label-heading">{{limitOrders[i].text}}</h2>
-                  <h2 class="body-base ds-display-2 label-heading">{{limitOrders[i].price}}</h2>
+                  <h2 class="body-base ds-display-2 label-heading">{{limitOrders[i].price}} step-4</h2>
                 </div>
-                <!-- <div class="diagnosis-sub-header">
-                  <h2 class="label-heading">{{chem.name}}</h2>
-                </div> -->
-                <div [class]="limitOrders[i].frequencyLimit ? 'frequency-limit': 'lcp-bg-color'">
-                  <div class="ds-flex --start-start">
+                <!-- <hr style="border-top: 1px dashed black;"> -->
+                <div class="diagnosis-details" *ngFor="let chem of limitOrders[i]?.chems">
+                  <div class="diagnosis-sub-header">
+                    <h2 class="label-heading">{{chem.name}}</h2>
+                  </div>
+                  <div [class]="limitOrders[i].frequencyLimit ? 'frequency-limit': 'lcp-bg-color'" *ngIf="chem.name!='GLUCOSE, SERUM'">
+                    <div class="ds-flex --start-start">
+                      <ng-container *ngIf="limitOrders[i].frequencyLimit">
+                        <span class="ds-icon--info ds-mr-8 ds-blue ds-font--24" aria-label="info"></span>
+                        <span class="ds-font--14 alert-text">
+                          The patient's health plan indicates a frequency limit on coverage for this test. step-4
+                          If
+                          exceeded, the patient may be financially liable.
+                        </span>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div [class]="'lcp-bg-color'">
+                    <div class=" ds-flex --start-start">
                     <ng-container *ngIf="limitOrders[i].frequencyLimit">
-                      <span class="ds-icon--info ds-mr-8 ds-blue ds-font--24" aria-label="info"></span>
-                      <span class="ds-font--14 alert-text">
-                        The patient's health plan indicates a frequency limit on coverage for this test.
-                        If
-                        exceeded, the patient may be financially liable.
-                      </span>
+                      <span class="ds-icon--alert ds-black ds-font--24 alert-icon" aria-label="alert"></span>
+                      <div>
+                        <p class="ds-Font--14 alert-text">
+                          Selected diagnoses do not satisfy the health plans Limited Coverage Policy.step-7
+                        </p>
+                        <ng-container *ngIf="limitOrders[i].diagnosisDisplayIndicator">
+                          <div class="diagnosis-codes" *ngIf="limitOrders[i].display !==''">
+                            <ng-container *ngIf=" !limitOrders[i]?.chems && !limitOrders[i]?.chems?.length">
+                            <span class="order-text">{{limitOrders[i].display.split('-')[0]}}</span>
+                            <span class="order-text">{{limitOrders[i].display.split('-')[1]}}step-6</span>
+                        </ng-container>
+                        <ng-container *ngIf="limitOrders[i]?.chems && limitOrders[i]?.chems?.length>0">
+                          <ng-container>
+                            <div class="flex-class">
+                              <!-- <span class="order-name">{{chem.name}}</span> -->
+                              <span class="order-text">{{chem.text}}</span>
+                              <span class="order-text">{{chem.code}}</span>
+                            </div>
+                          </ng-container> 
+                        </ng-container>
+                      </div>
+                      <div class="diagnosis-codes" *ngIf="limitOrders[i].display===''">
+                        <span class=" order-text">No associated diagnosis codes found for this
+                        test</span>
+  
+  
+  
+  
+                      </div>
                     </ng-container>
                   </div>
+              </ng-container>
+          </div>
+                  </div>
                 </div>
-                <div [class]="'lcp-bg-color'">
-                  <div class=" ds-flex --start-start">
-                  <ng-container *ngIf="limitOrders[i].frequencyLimit">
-                    <span class="ds-icon--alert ds-black ds-font--24 alert-icon" aria-label="alert"></span>
-                    <div>
-                      <p class="ds-Font--14 alert-text">
-                        Selected diagnoses do not satisfy the health plans Limited Coverage Policy.
-                      </p>
-                      <ng-container *ngIf="limitOrders[i].diagnosisDisplayIndicator">
-                        <div class="diagnosis-codes" *ngIf="limitOrders[i].display !==''">
-                          <ng-container *ngIf=" !limitOrders[i]?.chems && !limitOrders[i]?.chems?.length">
-                          <span class="order-text">{{limitOrders[i].display.split('-')[0]}}</span>
-                          <span class="order-text">{{limitOrders[i].display.split('-')[1]}}</span>
-                      </ng-container>
-                      <ng-container *ngIf="limitOrders[i]?.chems && limitOrders[i]?.chems?.length>0">
-                        <ng-container *ngFor="let chem of limitOrders[i]?.chems">
-                          <div class="flex-class">
-                            <span class="order-name">{{chem.name}}</span>
-                            <span class="order-text">{{chem.text}}</span>
-                            <span class="order-text">{{chem.code}}</span>
-                          </div>
-                        </ng-container>
-                      </ng-container>
-                    </div>
-                    <div class="diagnosis-codes" *ngIf="limitOrders[i].display===''">
-                      <span class=" order-text">No associated diagnosis codes found for this
-                      test</span>
-
-
-
-
-                    </div>
-                  </ng-container>
-                </div>
-            </ng-container>
-        </div>
-      </div>
     </div>
-  </ng-container>
+            </ng-container>
 </ng-container>
 </div>
 <h2 class="test-heading" style='margin-top: 24px;'>Other tests</h2>

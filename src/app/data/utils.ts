@@ -3143,6 +3143,31 @@ export const PricingResponse7 = {
             },
             "limitedCoverage": [
                 {
+                    "orderCode": "34392",
+                    "serviceCode": "0000483",
+                    "frequencyLimit": "false",
+                    "frequencyAlertMessage": "",
+                    "coveredByDiagnosis": "true",
+                    "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
+                    "commonSupportiveDiagnoses": [
+                        {
+                            code: "j40",
+                            "description": "bronch, not specified"
+                        },
+                        {
+                            code: "j40",
+                            "description": "bronch, not specified"
+                        },
+                        {
+                            code: "j40",
+                            "description": "bronch, not specified"
+                        }
+
+                    ],
+                    "diagnosisDisplayIndicator": "true",
+                    "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support",
+                },
+                {
                     "orderCode": "483",
                     "serviceCode": "0000483",
                     "frequencyLimit": "true",
@@ -3167,31 +3192,6 @@ export const PricingResponse7 = {
                     "diagnosisDisplayIndicator": "true",
                     "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support",
                 },
-                {
-                    "orderCode": "571",
-                    "serviceCode": "0000483",
-                    "frequencyLimit": "false",
-                    "frequencyAlertMessage": "",
-                    "coveredByDiagnosis": "true",
-                    "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
-                    "commonSupportiveDiagnoses": [
-                        {
-                            code: "j40",
-                            "description": "bronch, not specified"
-                        },
-                        {
-                            code: "j40",
-                            "description": "bronch, not specified"
-                        },
-                        {
-                            code: "j40",
-                            "description": "bronch, not specified"
-                        }
-
-                    ],
-                    "diagnosisDisplayIndicator": "true",
-                    "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support",
-                }
             ]
         },
         "elabs_response_token": "FE099D60-7ABB-11EF-860C-DA0262A0C8B5",
