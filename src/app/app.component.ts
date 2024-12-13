@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common'; // Import CommonModule
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { ExternalLabsModalComponent } from './external-labs-modal/external-labs-modal.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +13,7 @@ import { EmrService } from './emr-services/emr-service/emr.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule, MatDialogModule], // Include CommonModule in imports
+  imports: [CommonModule, HttpClientModule, FormsModule, MatDialogModule, RouterLink, RouterOutlet], // Include CommonModule in imports
   providers: [HttpClient, EmrService]
 })
 export class AppComponent {
@@ -43,9 +43,13 @@ ngOnInit():void{
   console.log(hookInstance)
 
   if(!hookInstance){
-    this.router.navigate([],{queryParams:{hookInstance:'00000000-007b-9f33-e810-e841a57c502c'},queryParamsHandling:'merge'})
-    hookInstance='00000000-007b-9f33-e810-e841a57c502c'
+    this.router.navigate(['/forbidden'])
   }
+
+  // if(!hookInstance){
+  //   this.router.navigate([''],{queryParams:{hookInstance:'00000000-007b-9f33-e810-e841a57c502c'},queryParamsHandling:'merge'})
+  //   hookInstance='00000000-007b-9f33-e810-e841a57c502c'
+  // }
   hookInstance && this.launchDialog({hookInstance});
 }
 }

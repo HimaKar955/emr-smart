@@ -125,55 +125,57 @@
         border-radius: 8px;
         margin: 0 !important;
 
-        .diagnosis-details {
-            display: flex;
-            flex-direction: column;
-            border-bottom: 1px solid lightgrey;
-            padding: 16px;
 
-            &:last-child {
-                border-bottom: none;
-            }
+    }
+}
 
-            @extend .diagnosis-header;
+.diagnosis-details {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid lightgrey;
+    padding: 16px;
 
-            .frequency-limit {
-                background: #F9FBFE;
-                border: 1px solid #2769DD;
-                padding: 1rem;
-                border-radius: 0.25rem;
-                margin-top: 8px;
+    &:last-child {
+        border-bottom: none;
+    }
 
-                @extend .alert-text;
-                @extend .alert-icon;
-            }
+    @extend .diagnosis-header;
 
-            .lcp-bg-color {
-                background: #FFFCFC;
-                border: 1px solid #E00028;
-                border-radius: 0.25rem;
-                padding: 1rem;
-                margin-top: 8px;
+    .frequency-limit {
+        background: #F9FBFE;
+        border: 1px solid #2769DD;
+        padding: 1rem;
+        border-radius: 0.25rem;
+        margin-top: 8px;
 
-                @extend .alert-text;
-                @extend .alert-icon;
-            }
+        @extend .alert-text;
+        @extend .alert-icon;
+    }
 
-            .diagnosis-codes {
-                span {
-                    // color: black;
+    .lcp-bg-color {
+        background: #FFFCFC;
+        border: 1px solid #E00028;
+        border-radius: 0.25rem;
+        padding: 1rem;
+        margin-top: 8px;
 
-                    &:nth-child(2) {
-                        margin-left: 24px;
-                    }
-                }
-            }
+        @extend .alert-text;
+        @extend .alert-icon;
+    }
 
-            .diagnosis-review-button {
-                margin-top: 0.8гem;
-                margin-left: 2.5rem;
+    .diagnosis-codes {
+        span {
+            // color: black;
+
+            &:nth-child(2) {
+                margin-left: 24px;
             }
         }
+    }
+
+    .diagnosis-review-button {
+        margin-top: 0.8гem;
+        margin-left: 2.5rem;
     }
 }
 

@@ -36,20 +36,25 @@ export class ApiTransformService {
     const limitedCoverage = pricingResponse.responseData.elabs_response_payload.limitedCoverage;
 
     const resultChem = this.hasOrderCodesInLimitedCoverage(chemPanel, chemServices, limitedCoverage);
-    console.log(`Are any OrderCodes in limited coverage? ${resultChem}`);
+    console.log(resultChem)
 
     serviceRequests.forEach((request:any) => {
       const orderCode = request.code.coding.find((c: any) => c.system.includes('epic'))?.code;
       const reason = request.reasonCode[0]?.coding?.find((r: any) => r.system.includes('icd-10-cm')) || {};
 
-      // Find in chemPanel
+     
       const chemPanelMatch = chemPanel.find((c: any) => c.OrderCode === orderCode);
+      const chemServiceMatch = chemServices.find((c: any) => c.OrderCode === orderCode);
+      // Find in chemPanel
+
       if (chemPanelMatch &&  resultChem) {
+        console.log("entered")
         const frequencyLimit = this.getCoverageValue(limitedCoverage, chemPanelMatch.OrderCode, 'frequencyLimit');
         const coveredByDiagnosis = this.getCoverageValue(limitedCoverage, chemPanelMatch.OrderCode, 'coveredByDiagnosis');
         const diagnosisDisplayIndicator = this.getCoverageValue(limitedCoverage, chemPanelMatch.OrderCode, 'diagnosisDisplayIndicator');
         // Adding in frequency List
         if(frequencyLimit) {
+          console.log(chemPanelMatch, frequencyLimit)
           formattedTestResults.FormattedTestResults.tests.chems.frequencyList.push({
             chemName: chemPanelMatch.PanelName,
             orderCode: chemPanelMatch.OrderCode,
@@ -57,7 +62,7 @@ export class ApiTransformService {
           });
         }
         // Adding in LCPL List
-        if(diagnosisDisplayIndicator) {
+        if(coveredByDiagnosis) {
           formattedTestResults.FormattedTestResults.tests.chems.lcplList.push({
             chemName: chemPanelMatch.PanelName,
             orderCode: chemPanelMatch.OrderCode,
@@ -71,19 +76,20 @@ export class ApiTransformService {
       }
 
       // Find in chemServices
-      const chemServiceMatch = chemServices.find((c: any) => c.OrderCode === orderCode);
-      if (chemServiceMatch &&  resultChem) {
+      else if (chemServiceMatch &&  resultChem) {
+        console.log("entered2")
         const frequencyLimit = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'frequencyLimit');
         const coveredByDiagnosis = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'coveredByDiagnosis');
         const diagnosisDisplayIndicator = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'diagnosisDisplayIndicator');
         if(frequencyLimit) {
+          console.log(chemServiceMatch, frequencyLimit)
           formattedTestResults.FormattedTestResults.tests.chems.frequencyList.push({
             chemName: chemServiceMatch.ServiceName,
             orderCode: chemServiceMatch.OrderCode,
             frequencyLimit: frequencyLimit,
           });
         }
-        if (diagnosisDisplayIndicator) {
+        if (coveredByDiagnosis) {
           formattedTestResults.FormattedTestResults.tests.chems.lcplList.push({
             chemName: chemServiceMatch.ServiceName,
             orderCode: chemServiceMatch.OrderCode,
@@ -97,9 +103,7 @@ export class ApiTransformService {
 
       // Find in nonChems
       const nonChemMatch = nonChemServices.find((c: any) => c.OrderCode === orderCode);
-      console.log(nonChemMatch)
       const resultNonChem = nonChemMatch && this.isNonChemMatchInLimitedCoverage(nonChemMatch, limitedCoverage) || false;
-      console.log(`Is nonChemMatch order code in limited coverage? ${resultNonChem}`);
       if (nonChemMatch && resultNonChem) {
         formattedTestResults.FormattedTestResults.tests['nonChems'].push({
           chemName: nonChemMatch.ServiceName,
@@ -115,15 +119,16 @@ export class ApiTransformService {
       }
 
       // Other Tests (not in chems or nonChems)
-      console.log(!chemPanelMatch , !chemServiceMatch , !resultChem)
-      console.log(!nonChemMatch, !resultNonChem)
-      console.log(nonChemMatch)
-      console.log(chemPanelMatch, chemServiceMatch)
-
+      console.log(chemPanelMatch , chemServiceMatch)
+      console.log((chemPanelMatch || chemServiceMatch) && !resultChem, resultChem)
+      console.log(nonChemMatch ,resultNonChem)
     if (((chemPanelMatch || chemServiceMatch) && !resultChem) || (nonChemMatch && !resultNonChem)) {
+      // console.log(chemPanelMatch , chemServiceMatch)
+      // console.log((chemPanelMatch || chemServiceMatch) && !resultChem, resultChem)
+      // console.log(nonChemMatch ,resultNonChem)
         if (nonChemMatch) {
             formattedTestResults.FormattedTestResults.otherTests['nonChems'].push({
-                chemName: request.code.text,
+                chemName: nonChemMatch.ServiceName,
                 orderCode: orderCode,
                 price: parseFloat(nonChemMatch['Patient FeeInfo']?.EstFee) || 0
             });
@@ -138,12 +143,20 @@ export class ApiTransformService {
     
     });
 
+    console.log(formattedTestResults,"hgfdctfvygbunhjhbgvfcdxsdrctvfbghnjbgvfcdxsdrcfvtbhnjmnhbgvfcdxsdcfvgbhnjhbgvfcdxsdcfvtbhunj")
+
     return formattedTestResults;
   }
 
-  private getCoverageValue(limitedCoverage: any, orderCode: string, key: string): string | null {
+  private getCoverageValue(limitedCoverage: any, orderCode: string, key: string): boolean | null {
     const coverage = limitedCoverage.find((coverage: any) => coverage.orderCode === orderCode);
-    return coverage ? coverage[key] : null;
+    console.log(coverage ? coverage[key] : null, typeof(coverage ? coverage[key] : null), )
+    if (coverage && typeof coverage[key] === "string") {
+      return coverage[key].toLowerCase() === "true";
+    }
+  
+    // Return null if no coverage is found or the key doesn't exist
+    return null;
   }
 
   private hasOrderCodesInLimitedCoverage(
@@ -165,8 +178,6 @@ export class ApiTransformService {
         nonChemMatch: { OrderCode: string },
         limitedCoverage: { orderCode: string }[]
     ): boolean {
-        console.log(nonChemMatch)
-        console.log(limitedCoverage)
         return limitedCoverage.some(coverage => coverage?.orderCode === nonChemMatch.OrderCode);
     }
 }

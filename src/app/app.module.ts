@@ -12,7 +12,7 @@ import { ExternalLabsModalComponent } from './external-labs-modal/external-labs-
   imports: [
     BrowserModule,
     HttpClientModule,
-    ExternalLabsModalComponent
+    ExternalLabsModalComponent,
     // other modules
   ],
   providers: [],

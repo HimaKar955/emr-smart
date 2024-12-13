@@ -3759,7 +3759,7 @@ export const PricingResponse8 = {
                     },
                     "PatientFeeInfo": {
                         "Comment": "LIST",
-                        "EstFee": "00000.00",
+                        "EstFee": "000100.00",
                         "Fee": "00067.82"
                     },
                     "ReasonCode": {},
@@ -3775,7 +3775,7 @@ export const PricingResponse8 = {
                             },
                             "Patient FeeInfo": {
                                 "Comment": "LIST",
-                                "EstFee": "00000.00",
+                                "EstFee": "000190.00",
                                 "Fee": "00042.90"
                             },
                             "ReasonCode": {},
@@ -3819,8 +3819,58 @@ export const PricingResponse8 = {
                 "Target": ""
             },
             "limitedCoverage": [
+                // {
+                //     "orderCode": "483",
+                //     "serviceCode": "0000483",
+                //     "frequencyLimit": "false",
+                //     "frequencyAlertMessage": "",
+                //     "coveredByDiagnosis": "true",
+                //     "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
+                //     "commonSupportiveDiagnoses": [
+                //         {
+                //             code: "j40",
+                //             "description": "bronch, not specified"
+                //         },
+                //         {
+                //             code: "j40",
+                //             "description": "bronch, not specified"
+                //         },
+                //         {
+                //             code: "j40",
+                //             "description": "bronch, not specified"
+                //         }
+
+                //     ],
+                //     "diagnosisDisplayIndicator": "true",
+                //     "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support",
+                // },
                 {
                     "orderCode": "34392",
+                    "serviceCode": "0000483",
+                    "frequencyLimit": "true",
+                    "frequencyAlertMessage": "",
+                    "coveredByDiagnosis": "true",
+                    "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
+                    "commonSupportiveDiagnoses": [
+                        {
+                            code: "j40",
+                            "description": "bronch, not specified"
+                        },
+                        {
+                            code: "j40",
+                            "description": "bronch, not specified"
+                        },
+                        {
+                            code: "j40",
+                            "description": "bronch, not specified"
+                        }
+
+                    ],
+                    "diagnosisDisplayIndicator": "true",
+                    "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support",
+                },
+                {
+                    "orderCode": "334",
                     "serviceCode": "0000483",
                     "frequencyLimit": "false",
                     "frequencyAlertMessage": "",
