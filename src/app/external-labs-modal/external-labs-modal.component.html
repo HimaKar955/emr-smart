@@ -50,16 +50,16 @@
                   Selected diagnoses do not satisfy the health plan's Limited Coverage Policy.
                 </p>
   
-                <ng-container *ngFor="let chem of formattedTestResults?.tests?.chems?.lcplList">
-                  <div class="diagnosis-codes">
+                <table *ngFor="let chem of formattedTestResults?.tests?.chems?.lcplList">
+                  <tr class="diagnosis-codes">
                     <div class="flex-class">
-                      <span class="order-text">{{ chem.chemName }}</span>
-                      <span class="order-text" *ngIf="chem.display && chem.diagnosisDisplayIndicator">{{ chem.display }}</span>
-                      <span class="order-text" *ngIf="!chem.display && chem.diagnosisDisplayIndicator">No associated diagnosis codes found for this test.</span>
-                      <span class="order-text" *ngIf="chem.diagnosisDisplayIndicator">{{ chem.code }}</span>
+                      <td class="order-text">{{ chem.chemName }}</td>
+                      <td class="order-text" *ngIf="chem.display && chem.diagnosisDisplayIndicator">{{ chem.display }}</td>
+                      <td class="order-text" *ngIf="!chem.display && chem.diagnosisDisplayIndicator">No associated diagnosis codes found for this test.</td>
+                      <td class="order-text" *ngIf="chem.diagnosisDisplayIndicator">{{ chem.code }}</td>
                     </div>
-                  </div>
-                </ng-container>
+                  </tr>
+                </table>
             </div>
         </div>
       </div>
@@ -99,13 +99,13 @@
                 </p>
   
                 <!-- Display code and display text if available -->
-                <div class="diagnosis-codes" *ngIf="chem.diagnosisDisplayIndicator">
-                  <div class="flex-class">
-                    <span class="order-text" *ngIf="chem.display">{{ chem.display }}</span>
-                    <span class="order-text" *ngIf="!chem.display">No associated diagnosis codes found for this test.</span>
-                    <span class="order-text">{{ chem.code }}</span>
-                  </div>
-                </div>
+                <table class="diagnosis-codes" *ngIf="chem.diagnosisDisplayIndicator">
+                  <tr class="flex-class">
+                    <td class="order-text" *ngIf="chem.display">{{ chem.display }}</td>
+                    <td class="order-text" *ngIf="!chem.display">No associated diagnosis codes found for this test.</td>
+                    <td class="order-text">{{ chem.code }}</td>
+                  </tr>
+                </table>
   
                 <!-- Show message if no associated diagnosis codes are found -->
                 <div class="diagnosis-codes" *ngIf="!chem.display">

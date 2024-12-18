@@ -42,14 +42,14 @@ ngOnInit():void{
 
   console.log(hookInstance)
 
-  if(!hookInstance){
-    this.router.navigate(['/forbidden'])
-  }
-
   // if(!hookInstance){
-  //   this.router.navigate([''],{queryParams:{hookInstance:'00000000-007b-9f33-e810-e841a57c502c'},queryParamsHandling:'merge'})
-  //   hookInstance='00000000-007b-9f33-e810-e841a57c502c'
+  //   this.router.navigate(['/forbidden'])
   // }
+
+  if(!hookInstance){
+    this.router.navigate([''],{queryParams:{hookInstance:'00000000-007b-9f33-e810-e841a57c502c'},queryParamsHandling:'merge'})
+    hookInstance='00000000-007b-9f33-e810-e841a57c502c'
+  }
   hookInstance && this.launchDialog({hookInstance});
 }
 }

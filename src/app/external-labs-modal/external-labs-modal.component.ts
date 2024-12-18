@@ -10,7 +10,6 @@ import { LCP_Text, PricingResponse1, PricingResponse2, PricingResponse3, Pricing
 import { environment } from '../../environments/environment';
 import { ApiTransformService } from '../emr-services/emr-service/converted.service';
 import { PricingResponseCodeSetup1, ServiceResponseCodeSetup1 } from '../data/refine.util';
-import { forkJoin } from 'rxjs';
 
 
 
@@ -48,32 +47,10 @@ export class ExternalLabsModalComponent implements OnInit {
     //   this.setPopupWidth(window.innerWidth);
     // }
 
-    const payload = { cds_hook_id: this.hookInstance };
-    const pricingPayload = { cds_hook_id: this.hookInstance };
-
-    forkJoin({
-      serviceResponse: this.emrService.post(payload, environment.cds_hook_Service_request_url),
-      pricingResponse: this.emrService.post(pricingPayload, environment.cds_hook_pricing_url),
-    }).subscribe({
-      next: (results) => {
-        this.serviceResponse = results.serviceResponse;
-        this.pricingResponse = results.pricingResponse;
-
-        console.log('Service Response:', this.serviceResponse);
-        console.log('Pricing Response:', this.pricingResponse);
-
-        const formattedData = this.apiTransformService.transformResponses(
-          this.serviceResponse,
-          this.pricingResponse
-        );
-
-        this.formattedTestResults = formattedData;
-        console.log('Transformed Data:', this.formattedTestResults);
-      },
-      error: (error) => {
-        console.error('Error during API calls:', error);
-      },
-    });
+    const serviceResponse = ServiceResponse8;
+    const pricingResponse = PricingResponse8;
+    const formattedData = this.apiTransformService.transformResponses(serviceResponse, pricingResponse);
+    this.formattedTestResults = formattedData.FormattedTestResults
   }
 
   @HostListener('window: resize', ['$event'])
@@ -88,9 +65,9 @@ export class ExternalLabsModalComponent implements OnInit {
       this.popupWidth = 750;
     }
   }
-
-  onReview() {
-    this.showPricing = false;
+  
+  onReview(){
+    this.showPricing =false;
   }
 }
 
