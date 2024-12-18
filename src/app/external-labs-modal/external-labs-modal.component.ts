@@ -47,6 +47,16 @@ export class ExternalLabsModalComponent implements OnInit {
     //   this.setPopupWidth(window.innerWidth);
     // }
 
+    this.emrService.post(payload, environment.cds_hook_Service_request_url).subscribe({
+      next: (response) => {
+        this.serviceResponse = response;
+        console.log('API response:', this.serviceResponse);
+      },
+      error: (error) => {
+        console.error('Error fetching data:', error);
+      },
+    });
+
     const serviceResponse = ServiceResponse8;
     const pricingResponse = PricingResponse8;
     const formattedData = this.apiTransformService.transformResponses(serviceResponse, pricingResponse);
