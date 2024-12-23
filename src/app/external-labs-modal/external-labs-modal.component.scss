@@ -9,7 +9,7 @@
     }
 }
 
-::ng-deep .mat-mdc-dialog-container-with-actions .mat-mdc-dialog-content{
+::ng-deep .mat-mdc-dialog-container-with-actions .mat-mdc-dialog-content {
     padding: var(--mat-dialog-with-actions-content-padding, 0 24px);
     padding-top: 0px;
 }
@@ -48,15 +48,15 @@
 .order-name {
     font-size: 16px;
     font-weight: 700;
-    line-height:25.6px;
+    line-height: 25.6px;
     margin-left: 0 !important;
 }
 
 .flex-class {
     display: flex;
-    gap:24px;
+    gap: 24px;
     margin-top: 0.5rem;
-    
+
     @extend .order-text;
     @extend .order-name;
 }
@@ -110,22 +110,20 @@
         color: black;
     }
 
-    .no-border{
+    .no-border {
         border: none !important;
         color: #151515;
         font-family: Roboto;
         font-size: 16px;
-        font-weight:400;
-        line-height:25.6px;
-        text-align:left;
+        font-weight: 400;
+        line-height: 25.6px;
+        text-align: left;
     }
 
     .dialog-container {
         border: 1px solid #d1d1d1;
         border-radius: 8px;
         margin: 0 !important;
-
-
     }
 }
 
@@ -179,26 +177,26 @@
     }
 }
 
-.photo-section{
+.photo-section {
     box-shadow: 0px -4px 4px -2px #18274B0f;
 }
 
 .review-button {
-    padding:6px 16px 6px 16px;
+    padding: 6px 16px 6px 16px;
     border-radius: 4px;
-    border:1px solid #35792A;
+    border: 1px solid #35792A;
     background: #fff;
     margin-top: 8px;
 
     &:hover {
         .button-text {
-            color:#fff;
+            color: #fff;
         }
     }
 
     .button-text {
         font-size: 16px;
-        font-weight:700;
+        font-weight: 700;
         line-height: 18px;
         letter-spacing: -0.01em;
         text-align: center;
@@ -214,8 +212,8 @@
     line-height: 32px;
     text-align: left;
     border-radius: 0px 0px 8px 8px;
-    box-shadow: 0px -4px 4px -2px rgba(24,39,75,0.06), 0px -4px 4px -2px rgba(24,39,75,0.06);
-    padding-left:24px;
+    box-shadow: 0px -4px 4px -2px rgba(24, 39, 75, 0.06), 0px -4px 4px -2px rgba(24, 39, 75, 0.06);
+    padding-left: 24px;
 }
 
 .diagnosis-estimated-price {
@@ -258,4 +256,16 @@ h2 {
 
 .mat-button {
     margin: 24px;
+}
+
+.bottom-text {
+    //styleName: Body/Small/Regular;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21.56px;
+    text-align: left;
+    color: #646464 !important;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }

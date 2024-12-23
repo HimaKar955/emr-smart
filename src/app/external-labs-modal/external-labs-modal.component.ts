@@ -47,8 +47,8 @@ export class ExternalLabsModalComponent implements OnInit {
     //   this.setPopupWidth(window.innerWidth);
     // }
 
-    const serviceResponse = ServiceResponse8;
-    const pricingResponse = PricingResponse8;
+    const serviceResponse = ServiceResponse7;
+    const pricingResponse = PricingResponse7;
     const formattedData = this.apiTransformService.transformResponses(serviceResponse, pricingResponse);
     this.formattedTestResults = formattedData.FormattedTestResults
   }

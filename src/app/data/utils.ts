@@ -3276,7 +3276,7 @@ export const PricingResponse7 = {
                     },
                     "PatientFeeInfo": {
                         "Comment": "LIST",
-                        "EstFee": "00000.00",
+                        "EstFee": "100.00",
                         "Fee": "00067.82"
                     },
                     "ReasonCode": {},
@@ -3292,7 +3292,7 @@ export const PricingResponse7 = {
                             },
                             "Patient FeeInfo": {
                                 "Comment": "LIST",
-                                "EstFee": "00000.00",
+                                "EstFee": "121.00",
                                 "Fee": "00042.90"
                             },
                             "ReasonCode": {},
@@ -3339,7 +3339,7 @@ export const PricingResponse7 = {
                 {
                     "orderCode": "34392",
                     "serviceCode": "0000483",
-                    "frequencyLimit": "false",
+                    "frequencyLimit": "true",
                     "frequencyAlertMessage": "",
                     "coveredByDiagnosis": "true",
                     "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
@@ -3364,7 +3364,7 @@ export const PricingResponse7 = {
                 {
                     "orderCode": "483",
                     "serviceCode": "0000483",
-                    "frequencyLimit": "true",
+                    "frequencyLimit": "false",
                     "frequencyAlertMessage": "",
                     "coveredByDiagnosis": "true",
                     "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
