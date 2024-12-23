@@ -26,6 +26,7 @@ export class ApiTransformService {
             'nonChems': []
         },
         totalPrice : parseFloat(pricingResponse?.responseData?.elabs_response_payload?.pricing?.Chems?.PatientFeeInfo?.EstFee) || 0,
+        isPrice: pricingResponse?.responseData?.elabs_response_payload?.pricing?.EstPatRespMsgCd === "Z"
       }
     };
 

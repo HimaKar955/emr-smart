@@ -3276,7 +3276,7 @@ export const PricingResponse7 = {
                     },
                     "PatientFeeInfo": {
                         "Comment": "LIST",
-                        "EstFee": "100.00",
+                        "EstFee": "7560.00",
                         "Fee": "00067.82"
                     },
                     "ReasonCode": {},

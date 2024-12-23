@@ -33,8 +33,6 @@ export class ExternalLabsModalComponent implements OnInit {
   error: any[] = [];
   price: number = 0;
   noPrice: string = '';
-  showPricing = true;
-
   formattedTestResults: any;
 
   constructor(private emrService: EmrService, private apiTransformService: ApiTransformService,
@@ -66,9 +64,6 @@ export class ExternalLabsModalComponent implements OnInit {
     }
   }
   
-  onReview(){
-    this.showPricing =false;
-  }
 }
 
 
