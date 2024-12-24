@@ -1,5 +1,6 @@
 .dialog-header-container {
     padding: 24px;
+    padding-bottom: 0px;
   
     .dialog-header {
       display: flex;
@@ -269,6 +270,7 @@
     color: #646464 !important;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
+    padding-bottom: 16px;
 }
 
 td {
