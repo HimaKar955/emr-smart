@@ -55,73 +55,79 @@
                 ></span>
                   <span class="ds-Font--14 alert-text">
                     Selected diagnoses do not satisfy the health plan's Limited Coverage Policy.
+                    <ng-container *ngIf="!formattedTestResults?.tests?.chems?.lcplList?.diagnosisDisplayIndicator">
+                      display indicator
+                    </ng-container>
                   </span>
                 </div>
 
                   <table>
                     <tr *ngFor="let chem of formattedTestResults?.tests?.chems?.lcplList">
                         <td class="order-name">{{ chem.chemName }}</td>
-                        <td class="order-text" *ngIf="chem.display && chem.diagnosisDisplayIndicator">{{ chem.display }}</td>
-                        <td class="order-text" *ngIf="!chem.display && chem.diagnosisDisplayIndicator">No associated diagnosis codes found for this test.</td>
-                        <td class="order-text" *ngIf="chem.diagnosisDisplayIndicator">{{ chem.code }}</td>
+                        <td class="order-text" *ngIf="chem.display && chem.code">{{ chem.display }}</td>
+                        <td class="order-text" *ngIf="!chem.display && chem.code">No associated diagnosis codes found for this test.</td>
+                        <td class="order-text">{{ chem.code }}</td>
                     </tr>
                   </table>
           </div>
       </div>
       <!-- Display tests non chems name-->
-      <div class="diagnosis-details ds--flex" *ngIf="formattedTestResults?.tests?.nonChems.length">
-        <!-- Display each chem name and its details -->
-        <ng-container *ngFor="let chem of formattedTestResults?.tests?.nonChems">
-          <div class="diagnosis-header">
-            <h2 class="label-heading">{{ chem.chemName }}</h2>
-            <h2 class="body-base ds-display-2 label-heading">
-              <ng-container *ngIf="!chem?.price && formattedTestResults?.isPrice; else showTestNonChemPrice">
-                Pricing Unavailable
-              </ng-container>
-              <ng-template #showTestNonChemPrice>
-                {{ chem.price | currency }}
-              </ng-template>
-            </h2>
-          </div>
-          <div class="frequency-limit" *ngIf="chem.frequencyLimit">
-            <div class="ds-flex --start-start">
-              <!-- Display frequency limit message if frequencyLimit is true -->
-                <span class="ds-icon--info ds-mr-8 ds-blue ds-font--24" aria-label="info"></span>
-                <span class="ds-font--14 alert-text">
-                  The patient's health plan indicates a frequency limit on coverage for this test.
-                  If exceeded, the patient may be financially liable.
-                </span>
+      <ng-container *ngIf="formattedTestResults?.tests?.nonChems.length">
+        <div class="diagnosis-details ds--flex" *ngFor="let chem of formattedTestResults?.tests?.nonChems">
+          <!-- Display each chem name and its details -->
+            <div class="diagnosis-header">
+              <h2 class="label-heading">{{ chem.chemName }}</h2>
+              <h2 class="body-base ds-display-2 label-heading">
+                <ng-container *ngIf="!chem?.price && formattedTestResults?.isPrice; else showTestNonChemPrice">
+                  Pricing Unavailable
+                </ng-container>
+                <ng-template #showTestNonChemPrice>
+                  {{ chem.price | currency }}
+                </ng-template>
+              </h2>
             </div>
-          </div>
-    
-          <div class="lcp-bg-color" *ngIf="chem.coveredByDiagnosis">
-            <div class="ds-flex --start-start">
-                <!-- Display diagnosis display indicator message if true -->
-                <span
-                  class="ds-icon--alert ds-black ds-font--24 alert-icon"
-                  aria-label="alert"
-                  
-                ></span>
-                  <span class="ds-Font--14 alert-text">
-                    Selected diagnoses do not satisfy the health plan's Limited Coverage Policy.
+            <div class="frequency-limit" *ngIf="chem.frequencyLimit">
+              <div class="ds-flex --start-start">
+                <!-- Display frequency limit message if frequencyLimit is true -->
+                  <span class="ds-icon--info ds-mr-8 ds-blue ds-font--24" aria-label="info"></span>
+                  <span class="ds-font--14 alert-text">
+                    The patient's health plan indicates a frequency limit on coverage for this test.
+                    If exceeded, the patient may be financially liable.
                   </span>
-          </div>
-                  <!-- Display code and display text if available -->
-                  <table class="diagnosis-codes" *ngIf="chem.diagnosisDisplayIndicator">
-                    <tr class="flex-class">
-                      <td class="order-name" *ngIf="chem.display">{{ chem.display }}</td>
-                      <td class="order-text" *ngIf="!chem.display">No associated diagnosis codes found for this test.</td>
-                      <td class="order-text">{{ chem.code }}</td>
-                    </tr>
-                  </table>
-    
-                  <!-- Show message if no associated diagnosis codes are found -->
-                  <div class="diagnosis-codes" *ngIf="!chem.display">
-                    <span class="order-text">No associated diagnosis codes found for this test.</span>
-                  </div>
+              </div>
             </div>
-        </ng-container>
-      </div>
+      
+            <div class="lcp-bg-color">
+              <div class="ds-flex --start-start">
+                  <!-- Display diagnosis display indicator message if true -->
+                  <span
+                    class="ds-icon--alert ds-black ds-font--24 alert-icon"
+                    aria-label="alert"
+                    
+                  ></span>
+                    <span class="ds-Font--14 alert-text">
+                      Selected diagnoses do not satisfy the health plan's Limited Coverage Policy.
+                      <ng-container *ngIf="!chem?.diagnosisDisplayIndicator">
+                        display indicator
+                      </ng-container>
+                    </span>
+            </div>
+                    <!-- Display code and display text if available -->
+                    <table class="diagnosis-codes">
+                      <tr class="flex-class">
+                        <td class="order-name" *ngIf="chem.display && chem.code">{{ chem.display }}</td>
+                        <td class="order-text" *ngIf="!chem.display && chem.code">No associated diagnosis codes found for this test.</td>
+                        <td class="order-text">{{ chem.code }}</td>
+                      </tr>
+                    </table>
+      
+                    <!-- Show message if no associated diagnosis codes are found -->
+                    <div class="diagnosis-codes" *ngIf="!chem.display">
+                      <span class="order-text">No associated diagnosis codes found for this test.</span>
+                    </div>
+            </div>
+        </div>
+      </ng-container>
 
       <!-- If test needing attention having empty-->
     <ng-container *ngIf="!formattedTestResults?.tests?.chems?.lcplList.length && !formattedTestResults?.tests?.chems?.frequencyList.length && !formattedTestResults?.tests['nonChems']?.length">
@@ -184,7 +190,7 @@
     <div class="diagnosis-header">
       <ng-container *ngIf="!formattedTestResults?.totalPrice && formattedTestResults?.isPrice; else totalPrice">
         <h2>
-          Pricing Unavailable
+          Unable to calculate total estimated patient pricing
         </h2>
       </ng-container>
       <ng-template #totalPrice>
@@ -200,26 +206,28 @@
       </ng-template>
     </div>
   </div>
+ <div>
   <span
-        class="dialog-text ds-gray__600 ds-flex ds-body-small --center-center"
-      >
-        The amounts above are estimates of patient responsibility based on a
-        number of factors including, but not limited to, contracted rates,
-        claims experience and benefit design. Patients will receive a bill from
-        Quest for the amount owed by the patient.
-      </span>
+  class="dialog-text ds-gray__600 ds-flex ds-body-small --center-center"
+>
+  The amounts above are estimates of patient responsibility based on a
+  number of factors including, but not limited to, contracted rates,
+  claims experience and benefit design. Patients will receive a bill from
+  Quest for the amount owed by the patient.
+</span>
 
-      <mat-dialog-actions class="ds-col-12 bottom-text">
-        <div class="ds-modal__actions ds-col-12 ds-flex --end-center">
-          <!-- <button mat-button [mat-dialog-close]="true" class="ds-button --primary --medium" aria-label="Continue">
-          Sign order
-        </button> -->
-          <span
-            >After reviewing the information, click the “X” button to proceed
-            with signing the order or return to Epic for modifications.</span
-          >
-        </div>
-      </mat-dialog-actions>
+<mat-dialog-actions class="ds-col-12 bottom-text">
+  <div class="ds-modal__actions ds-col-12 ds-flex --end-center">
+    <!-- <button mat-button [mat-dialog-close]="true" class="ds-button --primary --medium" aria-label="Continue">
+    Sign order
+  </button> -->
+    <span
+      >After reviewing the information, click the “X” button to proceed
+      with signing the order or return to Epic for modifications.</span
+    >
+  </div>
+</mat-dialog-actions>
+ </div>
 
 
 

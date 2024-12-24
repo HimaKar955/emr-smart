@@ -114,9 +114,9 @@ export class ApiTransformService {
           diagnosisDisplayIndicator: this.getCoverageValue(limitedCoverage, nonChemMatch.OrderCode, 'diagnosisDisplayIndicator'),
           code: reason.code || null,
           display: reason.display || null,
-          price: parseFloat(nonChemMatch['Patient FeeInfo']?.EstFee) || 0
+          price: parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0
         });
-        formattedTestResults.FormattedTestResults.totalPrice += parseFloat(nonChemMatch['Patient FeeInfo']?.EstFee) || 0;
+        formattedTestResults.FormattedTestResults.totalPrice += parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0;
       }
 
       // Other Tests (not in chems or nonChems)
@@ -131,9 +131,9 @@ export class ApiTransformService {
             formattedTestResults.FormattedTestResults.otherTests['nonChems'].push({
                 chemName: nonChemMatch.ServiceName,
                 orderCode: orderCode,
-                price: parseFloat(nonChemMatch['Patient FeeInfo']?.EstFee) || 0
+                price: parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0
             });
-            formattedTestResults.FormattedTestResults.totalPrice += parseFloat(nonChemMatch['Patient FeeInfo']?.EstFee) || 0;
+            formattedTestResults.FormattedTestResults.totalPrice += parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0;
         } else {
             formattedTestResults.FormattedTestResults.otherTests.chems.list.push({
                 chemName: request.code.text,
