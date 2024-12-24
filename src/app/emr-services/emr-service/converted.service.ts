@@ -31,12 +31,15 @@ export class ApiTransformService {
     };
 
     const serviceRequests = serviceResponse.responseData.ServiceRequest;
-    const chemPanel = pricingResponse.responseData.elabs_response_payload.pricing.Chems.ChemPanel;
-    const chemServices = pricingResponse.responseData.elabs_response_payload.pricing.Chems.ChemService;
-    const nonChemServices = pricingResponse.responseData.elabs_response_payload.pricing.NonChems.Service;
-    const limitedCoverage = pricingResponse.responseData.elabs_response_payload.limitedCoverage;
-
-    const resultChem = this.hasOrderCodesInLimitedCoverage(chemPanel, chemServices, limitedCoverage);
+    const chemPanel = pricingResponse.responseData.elabs_response_payload.pricing?.Chems?.ChemPanel;
+    const chemServices = pricingResponse.responseData.elabs_response_payload.pricing?.Chems?.ChemService;
+    const nonChemServices = pricingResponse.responseData.elabs_response_payload.pricing?.NonChems?.Service;
+    const limitedCoverage = pricingResponse.responseData.elabs_response_payload?.limitedCoverage;
+    let resultChem = false;
+    if (chemPanel || chemServices){
+      resultChem = this.hasOrderCodesInLimitedCoverage(chemPanel, chemServices, limitedCoverage);
+    }
+    
     console.log(resultChem)
 
     serviceRequests.forEach((request:any) => {
@@ -44,8 +47,8 @@ export class ApiTransformService {
       const reason = request.reasonCode[0]?.coding?.find((r: any) => r.system.includes('icd-10-cm')) || {};
 
      
-      const chemPanelMatch = chemPanel.find((c: any) => c.OrderCode === orderCode);
-      const chemServiceMatch = chemServices.find((c: any) => c.OrderCode === orderCode);
+      const chemPanelMatch = chemPanel?.find((c: any) => c?.OrderCode === orderCode);
+      const chemServiceMatch = chemServices?.find((c: any) => c?.OrderCode === orderCode);
       // Find in chemPanel
 
       if (chemPanelMatch &&  resultChem) {
@@ -166,8 +169,8 @@ export class ApiTransformService {
     limitedCoverage: { orderCode: string }[]
     ): boolean {
         const allOrderCodes = [
-            ...chemPanel.map(panel => panel.OrderCode),
-            ...chemServices.map(service => service.OrderCode),
+            ...chemPanel?.map(panel => panel.OrderCode),
+            ...chemServices?.map(service => service.OrderCode),
         ];
 
         return allOrderCodes.some(orderCode =>
