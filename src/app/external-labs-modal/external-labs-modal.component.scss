@@ -54,7 +54,7 @@
   
   .flex-class {
     display: flex;
-    gap: 24px;
+    // gap: 24px;
     margin-top: 0.5rem;
   
     @extend .order-text;
@@ -270,3 +270,26 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
 }
+
+td {
+
+  padding-left: 24px;
+  
+  }
+  
+  td:first-child {
+  padding-left: 0px;
+  }
+  
+  table{
+  border-collapse: collapse; 
+  width: 100%;
+  }
+  
+  tbody tr:not(:first-child){ 
+  margin-top: 8px;
+  }
+  
+  td{
+  padding: 8px;
+  }
