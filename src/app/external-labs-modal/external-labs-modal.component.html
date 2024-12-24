@@ -15,7 +15,7 @@
 
   <mat-dialog-content class="ds-col-12 dialog-content scrollable-content">
     <h2 class="test-heading">Test needing attention</h2>
-    <div class="dialog-container" [ngClass]="{'no-border': !formattedTestResults?.otherTests?.chems?.frequencyList.length && !formattedTestResults?.tests?.chems?.lcplList.length && !formattedTestResults?.tests['nonChems']?.length}">
+    <div class="dialog-container" [ngClass]="{'no-border': !formattedTestResults?.otherTests?.chems?.frequencyList?.length && !formattedTestResults?.tests?.chems?.lcplList.length && !formattedTestResults?.tests['nonChems']?.length}">
       <!-- Display tests Chems name-->
       <div class="diagnosis-details ds--flex" *ngIf="formattedTestResults?.tests?.chems?.frequencyList.length || formattedTestResults?.tests?.chems?.lcplList.length">
         <div class="diagnosis-header">
@@ -131,7 +131,7 @@
     </ng-container>
     </div>
     
-    <h2 class="test-heading" style="margin-top: 24px;">Other Tests</h2>
+    <h2 class="test-heading" style="margin-top: 24px;">Other tests</h2>
     <div class="dialog-container" [ngClass]="{'no-border': !formattedTestResults?.otherTests?.chems?.list.length && !formattedTestResults?.otherTests['nonChems']?.length}">
       
       <!-- Display Chems Section in Other Tests -->
@@ -200,15 +200,26 @@
       </ng-template>
     </div>
   </div>
-  <span class="dialog-text ds-gray_600 ds-flex ds-body-small --center-center bottom-text">
-    The amounts above are estimates of patient responsibility based on a number of factors including, but not
-    limited
-    to, contracted rates, claims experience and benefit design. Patients will receive a bill from Quest for the
-    amount
-    owed by the patient. <br> <br>
-    After reviewing the information, click the “X” button to proceed
-        with signing the order or return to Epic for modifications.
-  </span>
+  <span
+        class="dialog-text ds-gray__600 ds-flex ds-body-small --center-center"
+      >
+        The amounts above are estimates of patient responsibility based on a
+        number of factors including, but not limited to, contracted rates,
+        claims experience and benefit design. Patients will receive a bill from
+        Quest for the amount owed by the patient.
+      </span>
+
+      <mat-dialog-actions class="ds-col-12 bottom-text">
+        <div class="ds-modal__actions ds-col-12 ds-flex --end-center">
+          <!-- <button mat-button [mat-dialog-close]="true" class="ds-button --primary --medium" aria-label="Continue">
+          Sign order
+        </button> -->
+          <span
+            >After reviewing the information, click the “X” button to proceed
+            with signing the order or return to Epic for modifications.</span
+          >
+        </div>
+      </mat-dialog-actions>
 
 
 

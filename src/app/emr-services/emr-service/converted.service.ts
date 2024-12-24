@@ -171,7 +171,7 @@ export class ApiTransformService {
         ];
 
         return allOrderCodes.some(orderCode =>
-            limitedCoverage.some(coverage => coverage.orderCode === orderCode)
+            limitedCoverage?.some(coverage => coverage.orderCode === orderCode)
         );
     }
 
@@ -179,6 +179,6 @@ export class ApiTransformService {
         nonChemMatch: { OrderCode: string },
         limitedCoverage: { orderCode: string }[]
     ): boolean {
-        return limitedCoverage.some(coverage => coverage?.orderCode === nonChemMatch.OrderCode);
+        return limitedCoverage?.some(coverage => coverage?.orderCode === nonChemMatch.OrderCode);
     }
 }
