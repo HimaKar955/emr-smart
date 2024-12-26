@@ -3230,58 +3230,58 @@ export const PricingResponse7 = {
             "token": "FE099D60-7ABB-11EF-860C-DA0262A0C8B5",
             "pricingstatus": "enabled",
             "pricing": {
-                // "Chems": {
-                //     "ChemServiceCode": "0034705",
-                //     "ChemServiceName": "ELECTROLYTE PANEL, GLUCOSE, SERUM",
-                //     "ChemPanel": [
-                //         {
-                //             "PanelCode": "0034392",
-                //             "PanelName": "ELECTROLYTE PANEL",
-                //             "OrderCode": "34392",
-                //             "ChemService": [
-                //                 {
-                //                     "ServiceCode": "0000733",
-                //                     "ServiceName": "POTASSIUM",
-                //                     "OrderCode": null
-                //                 },
-                //                 {
-                //                     "ServiceCode": "0000836",
-                //                     "ServiceName": "SODIUM",
-                //                     "OrderCode": null
-                //                 },
-                //                 {
-                //                     "ServiceCode": "0000330",
-                //                     "ServiceName": "CHLORIDE",
-                //                     "OrderCode": null
-                //                 },
-                //                 {
-                //                     "ServiceCode": "0000310",
-                //                     "ServiceName": "CARBON DIOXIDE",
-                //                     "OrderCode": null
-                //                 }
-                //             ]
-                //         }
-                //     ],
+                "Chems": {
+                    "ChemServiceCode": "0034705",
+                    "ChemServiceName": "ELECTROLYTE PANEL, GLUCOSE, SERUM",
+                    "ChemPanel": [
+                        {
+                            "PanelCode": "0034392",
+                            "PanelName": "ELECTROLYTE PANEL",
+                            "OrderCode": "34392",
+                            "ChemService": [
+                                {
+                                    "ServiceCode": "0000733",
+                                    "ServiceName": "POTASSIUM",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000836",
+                                    "ServiceName": "SODIUM",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000330",
+                                    "ServiceName": "CHLORIDE",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000310",
+                                    "ServiceName": "CARBON DIOXIDE",
+                                    "OrderCode": null
+                                }
+                            ]
+                        }
+                    ],
 
-                //     "ChemService": [
-                //         {
-                //             "ServiceCode": "0000483",
-                //             "ServiceName": "GLUCOSE, SERUM",
-                //             "OrderCode": "483"
-                //         }
-                //     ],
-                //     "ClientFeeInfo": {
-                //         "Comment": "LIST",
-                //         "Fee": "00002.45"
-                //     },
-                //     "PatientFeeInfo": {
-                //         "Comment": "LIST",
-                //         "EstFee": "7560.00",
-                //         "Fee": "00067.82"
-                //     },
-                //     "ReasonCode": {},
-                //     "RemarkCode": {}
-                // },
+                    "ChemService": [
+                        {
+                            "ServiceCode": "0000483",
+                            "ServiceName": "GLUCOSE, SERUM",
+                            "OrderCode": "483"
+                        }
+                    ],
+                    "ClientFeeInfo": {
+                        "Comment": "LIST",
+                        "Fee": "00002.45"
+                    },
+                    "PatientFeeInfo": {
+                        "Comment": "LIST",
+                        "EstFee": "7560.00",
+                        "Fee": "00067.82"
+                    },
+                    "ReasonCode": {},
+                    "RemarkCode": {}
+                },
                 "NonChems": {
                     "Profile": [],
                     "Service": [
@@ -3353,7 +3353,7 @@ export const PricingResponse7 = {
             },
             "limitedCoverage": [
                 {
-                    "orderCode": "334",
+                    "orderCode": "483",
                     "serviceCode": "0000483",
                     "frequencyLimit": "true",
                     "frequencyAlertMessage": "",
@@ -3374,11 +3374,11 @@ export const PricingResponse7 = {
                         }
 
                     ],
-                    "diagnosisDisplayIndicator": "false",
+                    "diagnosisDisplayIndicator": "true",
                     "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support",
                 },
                 {
-                    "orderCode": "338",
+                    "orderCode": "34392",
                     "serviceCode": "0000338",
                     "frequencyLimit": "true",
                     "frequencyAlertMessage": "",
@@ -3399,7 +3399,7 @@ export const PricingResponse7 = {
                         }
 
                     ],
-                    "diagnosisDisplayIndicator": "false",
+                    "diagnosisDisplayIndicator": "true",
                     "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support",
                 },
             ]

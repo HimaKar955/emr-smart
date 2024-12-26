@@ -106,7 +106,7 @@ export class ApiTransformService {
       }
 
       // Find in nonChems
-      const nonChemMatch = nonChemServices.find((c: any) => c.OrderCode === orderCode);
+      const nonChemMatch = nonChemServices?.find((c: any) => c.OrderCode === orderCode);
       const resultNonChem = nonChemMatch && this.isNonChemMatchInLimitedCoverage(nonChemMatch, limitedCoverage) || false;
       if (nonChemMatch && resultNonChem) {
         formattedTestResults.FormattedTestResults.tests['nonChems'].push({

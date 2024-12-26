@@ -1,157 +1,118 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExternalLabsModalComponent } from './external-labs-modal.component';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { of } from 'rxjs';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { EmrService } from '../emr-services/emr-service/emr.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ApiTransformService } from '../emr-services/emr-service/converted.service';
+import { of, throwError } from 'rxjs';
 
+describe('ExternalLabsModalComponent', () => {
+  let component: ExternalLabsModalComponent;
+  let fixture: ComponentFixture<ExternalLabsModalComponent>;
+  let emrService: jasmine.SpyObj<EmrService>;
+  let apiTransformService: jasmine.SpyObj<ApiTransformService>;
 
-describe('External LabsModalComponent', () => {
-    let component: ExternalLabsModalComponent;
-    let fixture: ComponentFixture<ExternalLabsModalComponent>;
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-    imports: [ExternalLabsModalComponent],
-    providers: [{
-            provide: MAT_DIALOG_DATA, useValue: {}
-        },
-        {
-            provide: EmrService, useValue: {}
-        }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-})
+  beforeEach(async () => {
+    const emrServiceSpy = jasmine.createSpyObj('EmrService', ['post']);
+    const apiTransformServiceSpy = jasmine.createSpyObj('ApiTransformService', ['transformResponses']);
 
+    await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, MatDialogModule],
+      declarations: [ExternalLabsModalComponent],
+      providers: [
+        { provide: EmrService, useValue: emrServiceSpy },
+        { provide: ApiTransformService, useValue: apiTransformServiceSpy },
+        { provide: MAT_DIALOG_DATA, useValue: { hookInstance: 'test-hook', url: 'test-url' } },
+      ],
+    }).compileComponents();
 
-            .compileComponents();
+    fixture = TestBed.createComponent(ExternalLabsModalComponent);
+    component = fixture.componentInstance;
+    emrService = TestBed.inject(EmrService) as jasmine.SpyObj<EmrService>;
+    apiTransformService = TestBed.inject(ApiTransformService) as jasmine.SpyObj<ApiTransformService>;
+  });
 
-        fixture = TestBed.createComponent(ExternalLabsModalComponent);
-        component = fixture.componentInstance;
-        component.data.url = undefined;
-        fixture.detectChanges();
-    }));
-    it('should call getPricingData()', () => {
-        const data = {
-            responseData: {
-                elabs_response_payload: {
-                    pricing: {
-                        chems: {
-                            ChemServiceName: 'ASC, ASE, ASB, ASF',
-                            PatientFeeInfo: { EstFee: "5.0000" },
-                            ChemPanel: [
-                                {
-                                    PanelName: 'ASC',
-                                    OrderCode: '1231',
-                                    PanelCode: '1231',
-                                    serviceName: "ASC",
-                                    price: "02.00"
-                                },
-                                {
-                                    PanelName: 'ASE',
-                                    OrderCode: '1232',
-                                    PanelCode: '1232',
-                                    serviceName: "ASE",
-                                    price: "02.00"
-                                },
-                                {
-                                    PanelName: 'ASB',
-                                    OrderCode: '1233',
-                                    PanelCode: '1233',
-                                    serviceName: "ASB",
-                                    price: "02.00"
-                                },
-                                {
-                                    PanelName: 'ASF',
-                                    OrderCode: '1234',
-                                    PanelCode: '1234',
-                                    serviceName: "ASF",
-                                    price: "02.00"
-                                }
-                            ]
-                        },
-                        NonChems: {
-                            Service: [
-                                {
-                                    ServiceName: 'ABC',
-                                    OrderCode: '1234',
-                                    ServiceCode: '1234',
-                                    serviceName: "ABC",
-                                    price: "02.00",
-                                    PatientFeeInfo: {
-                                        EstFee: "03.00",
-                                    },
-                                },
-                                {
-                                    ServiceName: 'ASQ',
-                                    OrderCode: '1237',
-                                    ServiceCode: '127',
-                                    serviceName: "ASQ",
-                                    price: "02.00",
-                                    PatientFeeInfo: {
-                                        EstFee: "05.10",
-                                    },
-                                },
-                                {
-                                    ServiceName: 'ASW',
-                                    OrderCode: '1236',
-                                    ServiceCode: '1236',
-                                    serviceName: "ASW",
-                                    price: "02.00",
-                                    PatientFeeInfo: {
-                                        EstFee: "03.00",
-                                    },
-                                },
-                                {
-                                    ServiceName: 'ASD',
-                                    OrderCode: '1235',
-                                    ServiceCode: '1235',
-                                    serviceName: "ASD",
-                                    price: "02.00",
-                                    PatientFeeInfo: {
-                                        EstFee: "30.00",
-                                    },
-                                }
-                            ],
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
+  });
 
-                        }
-                    }
-                }
-            }
+  it('should initialize properties in ngOnInit', () => {
+    component.ngOnInit();
+    expect(component.hookInstance).toBe('test-hook');
+  });
 
-        } as any;
+  it('should set popup width based on screen size in ngOnInit', () => {
+    spyOn(component, 'setPopupWidth');
+    component.ngOnInit();
+    expect(component.setPopupWidth).toHaveBeenCalledWith(window.innerWidth);
+  });
 
-        const codes = [
-            {
-                "1234": { text: "ABC", code: "I10", display: "hyper" }
-            },
-            {
-                "1235": { text: "ASD", code: "I10", display: "tension" }
-            },
-            {
-                "1236": { text: "ASW", code: "I10", display: "hyp" }
-            },
-            {
-                "1237": { text: "ASQ", code: "I10", display: "per" }
-            },
-            {
-                "1238": { text: "ASF", code: "I10", display: "yper" }
-            },
-            {
-                "1239": { text: "ASB", code: "I20", display: "CVC" }
-            },
-            {
-                "1231": { text: "ASC", code: "I10", display: "VC" }
-            },
-            {
-                "1232": { text: "ASE", code: "", display: "" }
-            },
-        ];
-        const spy = spyOn(component['emrService'], 'post');
-        spy.and.returnValue(of(data) as any);
+  it('should handle successful API responses', () => {
+    const serviceResponseMock = [{ id: 1 }];
+    const pricingResponseMock = [{ id: 2 }];
+    const transformedDataMock = { FormattedTestResults: { tests: 'Test Data' } };
 
-        component.getPricingData(codes)
-        expect(component).toBeTruthy();
+    emrService.post.and.returnValues(of(serviceResponseMock), of(pricingResponseMock));
+    apiTransformService.transformResponses.and.returnValue(transformedDataMock);
 
-    });
+    component.ngOnInit();
 
+    expect(emrService.post).toHaveBeenCalledTimes(2);
+    expect(apiTransformService.transformResponses).toHaveBeenCalledWith(serviceResponseMock, pricingResponseMock);
+    expect(component.serviceResponse).toEqual(serviceResponseMock);
+    expect(component.pricingResponse).toEqual(pricingResponseMock);
+    expect(component.formattedTestResults).toEqual(transformedDataMock.FormattedTestResults);
+  });
 
+  it('should handle API errors gracefully', () => {
+    emrService.post.and.returnValue(throwError(() => new Error('API Error')));
+
+    component.ngOnInit();
+
+    expect(emrService.post).toHaveBeenCalledTimes(2);
+    expect(component.error).toBe('Pricing and coverage information unavailable');
+  });
+
+  it('should set popup width correctly based on screen size', () => {
+    component.setPopupWidth(500);
+    expect(component.popupWidth).toBe(650);
+
+    component.setPopupWidth(800);
+    expect(component.popupWidth).toBe(750);
+
+    component.setPopupWidth(1100);
+    expect(component.popupWidth).toBe(750); // Default for larger widths
+  });
+
+  it('should call setPopupWidth on window resize', () => {
+    spyOn(component, 'setPopupWidth');
+    component.onResize({ target: { innerWidth: 1024 } });
+    expect(component.setPopupWidth).toHaveBeenCalledWith(1024);
+  });
+
+  it('should toggle showPricing when onReview is called', () => {
+    component.showPricing = true;
+    component.onReview();
+    expect(component.showPricing).toBeFalse();
+  });
+
+  it('should handle empty or null hookInstance gracefully', () => {
+    component.data.hookInstance = null;
+    component.ngOnInit();
+    expect(component.hookInstance).toBeNull();
+  });
+
+  it('should log errors during API calls', () => {
+    spyOn(console, 'error');
+    emrService.post.and.returnValue(throwError(() => new Error('API Error')));
+
+    component.ngOnInit();
+
+    expect(console.error).toHaveBeenCalledWith('Error during API calls:', jasmine.any(Error));
+  });
+
+  it('should not adjust popup width if called with invalid width', () => {
+    component.setPopupWidth(undefined as unknown as number); // Simulate invalid input
+    expect(component.popupWidth).toBe(750); // Default remains unchanged
+  });
 });
