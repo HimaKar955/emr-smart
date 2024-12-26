@@ -44,7 +44,7 @@ export class ApiTransformService {
 
     serviceRequests.forEach((request:any) => {
       const orderCode = request.code.coding.find((c: any) => c.system.includes('epic'))?.code;
-      const reason = request.reasonCode[0]?.coding?.find((r: any) => r.system.includes('icd-10-cm')) || {};
+      const reason = request.reasonCode?.[0]?.coding?.find((r: any) => r.system.includes('icd-10-cm')) || {};
 
      
       const chemPanelMatch = chemPanel?.find((c: any) => c?.OrderCode === orderCode);
@@ -152,7 +152,10 @@ export class ApiTransformService {
     return formattedTestResults;
   }
 
-  private getCoverageValue(limitedCoverage: any, orderCode: string, key: string): boolean | null {
+  getCoverageValue(limitedCoverage: any, orderCode: string, key: string): boolean | null {
+    if (!Array.isArray(limitedCoverage)) {
+      return null; // Return null if limitedCoverage is not an array
+    }
     const coverage = limitedCoverage.find((coverage: any) => coverage.orderCode === orderCode);
     console.log(coverage ? coverage[key] : null, typeof(coverage ? coverage[key] : null), )
     if (coverage && typeof coverage[key] === "string") {
