@@ -1,5 +1,5 @@
 <div [ngStyle]="{'width.px': popupWidth}">
-  <ng-container *ngIf="!error">
+  
     <div class="dialog-header-container">
       <div class="dialog-header">
         <div class="ds-brand-wrapper --medium">
@@ -12,7 +12,7 @@
         </div> -->
       </div>
     </div>
-
+    <ng-container *ngIf="!error">
     <mat-dialog-content class="ds-col-12 dialog-content scrollable-content">
       <h2 class="test-heading">Test needing attention</h2>
       <div class="dialog-container"
