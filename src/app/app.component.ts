@@ -17,7 +17,6 @@ import { EmrService } from './emr-services/emr-service/emr.service';
   providers: [HttpClient, EmrService]
 })
 export class AppComponent {
-  authToken = "" // Initialize authToken
 
   constructor(public dialog:MatDialog,
     private router: Router,
@@ -33,25 +32,14 @@ export class AppComponent {
     });
 
     dialoRef.afterClosed();
-}
-ngOnInit():void{
-  const url=new URL(this.document.location.href);
-  let hookInstance=url.searchParams.get('hookInstance');
-
-  console.log(url)
-
-  console.log(hookInstance)
-
-  // if(!hookInstance){
-  //   this.router.navigate(['/forbidden'])
-  // }
-
-  if(!hookInstance){
-    this.router.navigate([''],{queryParams:{hookInstance:'00000000-007b-9f33-e810-e841a57c502c'},queryParamsHandling:'merge'})
-    hookInstance='00000000-007b-9f33-e810-e841a57c502c'
   }
-  hookInstance && this.launchDialog({hookInstance});
-}
-}
+  ngOnInit():void{
+    const url=new URL(this.document.location.href);
+    let hookInstance=url.searchParams.get('hookInstance');
 
-
+    if(!hookInstance){
+      this.router.navigate(['/forbidden'])
+    }
+    hookInstance && this.launchDialog({hookInstance});
+  }
+}

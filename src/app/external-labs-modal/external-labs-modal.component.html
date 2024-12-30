@@ -70,7 +70,7 @@
               <tr *ngFor="let chem of formattedTestResults?.tests?.chems?.lcplList">
                 <td class="order-name">{{ chem.chemName }}</td>
                 <td class="order-text" *ngIf="chem.code">{{ chem.display }}</td>
-                <td class="order-text" *ngIf="chem.code">No associated diagnosis codes found for this test.</td>
+                <td class="order-text" *ngIf="!chem.code">No associated diagnosis codes found for this test.</td>
                 <td class="order-text">{{ chem.code }}</td>
               </tr>
             </table>
@@ -116,8 +116,8 @@
               <!-- Display code and display text if available -->
               <table class="diagnosis-codes">
                 <tr class="flex-class">
-                  <td class="order-name" *ngIf="chem.display && chem.code">{{ chem.display }}</td>
-                  <td class="order-text" *ngIf="!chem.display && chem.code">No associated diagnosis codes found for this
+                  <td class="order-name" *ngIf="chem.code">{{ chem.display }}</td>
+                  <td class="order-text" *ngIf="!chem.code">No associated diagnosis codes found for this
                     test.</td>
                   <td class="order-text">{{ chem.code }}</td>
                 </tr>
