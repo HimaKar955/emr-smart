@@ -12,7 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { EmrService } from '../emr-services/emr-service/emr.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LCP_Text } from '../data/utils';
+import { LCP_Text, PricingResponse7, ServiceResponse7 } from '../data/utils';
 import { environment } from '../../environments/environment';
 import { ApiTransformService } from '../emr-services/emr-service/converted.service';
 import { forkJoin } from 'rxjs';
@@ -70,38 +70,45 @@ export class ExternalLabsModalComponent implements OnInit {
     };
     const pricingPayload = { cds_hook_id: this.hookInstance };
 
-    forkJoin({
-      serviceResponse: this.emrService.post(
-        payload,
-        environment.cds_hook_Service_request_url
-      ),
-      pricingResponse: this.emrService.post(
-        pricingPayload,
-        environment.cds_hook_pricing_url
-      ),
-    }).subscribe({
-      next: (results) => {
-        this.serviceResponse = results.serviceResponse;
-        this.pricingResponse = results.pricingResponse;
+    const serviceResponse = ServiceResponse7;
+    const pricingResponse = PricingResponse7;
+    const formattedData = this.apiTransformService.transformResponses(serviceResponse, pricingResponse);
+    this.formattedTestResults = formattedData?.FormattedTestResults;
 
-        console.log('Service Response:', this.serviceResponse);
-        console.log('Pricing Response:', this.pricingResponse);
 
-        const formattedData = this.apiTransformService.transformResponses(
-          this.serviceResponse,
-          this.pricingResponse
-        );
 
-        this.formattedTestResults = formattedData?.FormattedTestResults;
-        console.log('Transformed Data:', this.formattedTestResults);
-        console.log(this.formattedTestResults?.FormattedTestResults?.tests);
-        console.log(this.formattedTestResults?.tests?.chems?.lcplList);
-      },
-      error: (error) => {
-        console.error('Error during API calls:', error);
-        this.error = 'Pricing and coverage information unavailable';
-      },
-    });
+    // forkJoin({
+    //   serviceResponse: this.emrService.post(
+    //     payload,
+    //     environment.cds_hook_Service_request_url
+    //   ),
+    //   pricingResponse: this.emrService.post(
+    //     pricingPayload,
+    //     environment.cds_hook_pricing_url
+    //   ),
+    // }).subscribe({
+    //   next: (results) => {
+    //     this.serviceResponse = results.serviceResponse;
+    //     this.pricingResponse = results.pricingResponse;
+
+    //     console.log('Service Response:', this.serviceResponse);
+    //     console.log('Pricing Response:', this.pricingResponse);
+
+    //     const formattedData = this.apiTransformService.transformResponses(
+    //       this.serviceResponse,
+    //       this.pricingResponse
+    //     );
+
+    //     this.formattedTestResults = formattedData?.FormattedTestResults;
+    //     console.log('Transformed Data:', this.formattedTestResults);
+    //     console.log(this.formattedTestResults?.FormattedTestResults?.tests);
+    //     console.log(this.formattedTestResults?.tests?.chems?.lcplList);
+    //   },
+    //   error: (error) => {
+    //     console.error('Error during API calls:', error);
+    //     this.error = 'Pricing and coverage information unavailable';
+    //   },
+    // });
   }
 
   @HostListener('window: resize', ['$event'])
