@@ -16,6 +16,7 @@ import { LCP_Text, PricingResponse7, ServiceResponse7 } from '../data/utils';
 import { environment } from '../../environments/environment';
 import { ApiTransformService } from '../emr-services/emr-service/converted.service';
 import { forkJoin } from 'rxjs';
+import { SelectDiagnosisComponent } from '../select-diagnosis/select-diagnosis.component';
 // import { ApiTransformService } from '../emr-services/emr-service/converted.service';
 // import { PricingResponseCodeSetup1, ServiceResponseCodeSetup1 } from '../data/refine.util';
 
@@ -29,6 +30,7 @@ import { forkJoin } from 'rxjs';
     MatIconModule,
     MatDialogModule,
     HttpClientModule,
+    SelectDiagnosisComponent,
   ],
   providers: [EmrService, HttpClient],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -47,6 +49,7 @@ export class ExternalLabsModalComponent implements OnInit {
   price: number = 0;
   noPrice: string = '';
   showPricing = true;
+  showSelectDiagnosis = false;
   serviceResponse: any[] = [];
   pricingResponse: any[] = [];
 
