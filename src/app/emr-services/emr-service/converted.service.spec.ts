@@ -146,7 +146,6 @@ describe('ApiTransformService', () => {
       spyOn(service as any, 'hasOrderCodesInLimitedCoverage').and.returnValue(false);
 
       const result = service.transformResponses(serviceResponse, pricingResponse);
-      console.log(result, "test resilt")
       expect(result.FormattedTestResults.tests.chems.lcplList.length).toBe(0);
       expect(result.FormattedTestResults.tests.chems.frequencyList.length).toBe(0);
     });

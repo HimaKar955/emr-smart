@@ -52,6 +52,7 @@ export class ExternalLabsModalComponent implements OnInit {
   showSelectDiagnosis = false;
   serviceResponse: any[] = [];
   pricingResponse: any[] = [];
+  limitedCoverage: any[] = [];
 
   formattedTestResults: any;
 
@@ -77,6 +78,7 @@ export class ExternalLabsModalComponent implements OnInit {
     const pricingResponse = PricingResponse7;
     const formattedData = this.apiTransformService.transformResponses(serviceResponse, pricingResponse);
     this.formattedTestResults = formattedData?.FormattedTestResults;
+    this.limitedCoverage = formattedData?.FormattedTestResults.limitedCoverage;
 
 
 
@@ -94,21 +96,14 @@ export class ExternalLabsModalComponent implements OnInit {
     //     this.serviceResponse = results.serviceResponse;
     //     this.pricingResponse = results.pricingResponse;
 
-    //     console.log('Service Response:', this.serviceResponse);
-    //     console.log('Pricing Response:', this.pricingResponse);
-
     //     const formattedData = this.apiTransformService.transformResponses(
     //       this.serviceResponse,
     //       this.pricingResponse
     //     );
 
     //     this.formattedTestResults = formattedData?.FormattedTestResults;
-    //     console.log('Transformed Data:', this.formattedTestResults);
-    //     console.log(this.formattedTestResults?.FormattedTestResults?.tests);
-    //     console.log(this.formattedTestResults?.tests?.chems?.lcplList);
     //   },
     //   error: (error) => {
-    //     console.error('Error during API calls:', error);
     //     this.error = 'Pricing and coverage information unavailable';
     //   },
     // });

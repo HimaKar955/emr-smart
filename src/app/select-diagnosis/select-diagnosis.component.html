@@ -1,71 +1,62 @@
 <div class="diagnosis-modal">
-    <!-- Header -->
-    <div class="modal-header">
+  <!-- Header -->
+  <div class="modal-header">
       <button class="logo-btn">Quest Logo</button>
-      <button class="close-btn">&times;</button>
-    </div>
-  
-    <!-- Navigation Tabs -->
-    <div class="tabs">
-      <div class="tab active">✔ Review & Acknowledge Policy</div>
-      <div class="tab selected">2 Select Diagnosis</div>
-    </div>
-  
-    <!-- Diagnosis Information -->
-    <div class="content">
-      <h2>Iron Total</h2>
-      <p class="info-text">
-        The insurance carrier’s policy includes the following diagnoses that COULD potentially support medical necessity.
-        The selected diagnosis code must be applicable to the patient’s symptoms or conditions.
-      </p>
-  
-      <!-- Search & Filter -->
-      <div class="search-container">
-        <span class="diagnosis-count">35 possible diagnoses.</span>
-        <input type="text" class="search-input" placeholder="Search for a diagnosis">
-        
+  </div>
 
-        <div class="filter-options">
-          <button class="filter-btn active">Commonly Used</button>
-          <button class="filter-btn">All</button>
+  <!-- Diagnosis Information -->
+  <div class="content">
+    <div class="info-text">
+      <h2 class="title">Confirm Diagnosis</h2>
+      <p>
+          The insurance carrier’s policy includes the following diagnoses that COULD potentially support medical necessity.
+          The selected diagnosis code must be applicable to the patient’s symptoms or conditions.
+      </p>
+    </div>
+    <div class="search-container">
+        <h1 class="title">Iron Total</h1>
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="Search for a diagnosis">
+            <div class="search-meta">
+                <span class="diagnosis-count"> Total results <br>
+                    {{limitedCoverage?.length}} possible diagnoses.</span>
+                <div class="filter-options">
+                    <button class="filter-btn active">
+                        Commonly Used</button>
+                    <button class="filter-btn">All</button>
+                </div>
+            </div>
         </div>
-      </div>
-  
+    </div>
+    
+    
       <!-- Diagnoses Table -->
-      <div class="diagnosis-table">
-        <div class="diagnosis-row">
-          <span class="diagnosis-name">Anemia, unspecified</span>
-          <span class="diagnosis-code">D64.9</span>
-        </div>
-        <div class="diagnosis-row">
-          <span class="diagnosis-name">Diagnosis description...</span>
-          <span class="diagnosis-code">DX4.7</span>
-        </div>
-        <div class="diagnosis-row">
-          <span class="diagnosis-name">A very long Diagnosis Description would go right here to show spacing...</span>
-          <span class="diagnosis-code">DX4.8</span>
-        </div>
-        <div class="diagnosis-row">
-          <span class="diagnosis-name">Diagnosis description...</span>
-          <span class="diagnosis-code">DX4.7</span>
-        </div>
-        <div class="diagnosis-row">
-          <span class="diagnosis-name">A very long Diagnosis Description would go right here to show spacing...</span>
-          <span class="diagnosis-code">DX4.8</span>
-        </div>
-      </div>
-  
+      <table class="diagnosis-table">
+        <thead>
+            <tr class="diagnosis-header">
+                <th class="column-header">Description <span class="ds-icon--arrow-up ds-black ds-font--24" aria-label="arrow-up"></span></th>
+                <th class="column-header">ICD-10 Code <span class="ds-icon--arrows-down-up ds-black ds-font--24" aria-label="arrows-down-up"></span></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let test of limitedCoverage">
+            <tr class="diagnosis-row">
+                <td class="diagnosis-name">{{test.description}}</td>
+                <td class="diagnosis-code">{{test.code}}</td>
+            </tr>
+        </tbody>
+    </table>
+
       <!-- Acknowledgment & Policy -->
       <p class="policy-text">
-        Limited Coverage Policy has been acknowledged. <a href="#" class="review-link">Review Policy</a>
+          Limited Coverage Policy has been acknowledged. <a href="#" class="review-link">Review Policy</a>
       </p>
-  
+
       <!-- Buttons -->
       <div class="buttons">
-        <button class="btn back-btn">Back</button>
-        <button class="btn primary-btn">Copy Diagnosis and Close</button>
+          <button class="btn back-btn">Back</button>
+          <button class="btn primary-btn">Copy Diagnosis and Close</button>
       </div>
-    </div>
   </div>
+</div>
   
   

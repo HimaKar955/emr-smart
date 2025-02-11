@@ -26,7 +26,8 @@ export class ApiTransformService {
             'nonChems': []
         },
         totalPrice : parseFloat(pricingResponse?.responseData?.elabs_response_payload?.pricing?.Chems?.PatientFeeInfo?.EstFee) || 0,
-        isPrice: pricingResponse?.responseData?.elabs_response_payload?.pricing?.EstPatRespMsgCd === "Z"
+        isPrice: pricingResponse?.responseData?.elabs_response_payload?.pricing?.EstPatRespMsgCd === "Z",
+        limitedCoverage: this.appendCommonSupportiveDiagnoses(pricingResponse.responseData.elabs_response_payload?.limitedCoverage)
       }
     };
 
@@ -39,8 +40,6 @@ export class ApiTransformService {
     if (chemPanel || chemServices){
       resultChem = this.hasOrderCodesInLimitedCoverage(chemPanel, chemServices, limitedCoverage);
     }
-    
-    console.log(resultChem)
 
     serviceRequests.forEach((request:any) => {
       const orderCode = request.code.coding.find((c: any) => c.system.includes('epic'))?.code;
@@ -52,13 +51,11 @@ export class ApiTransformService {
       // Find in chemPanel
 
       if (chemPanelMatch &&  resultChem) {
-        console.log("entered")
         const frequencyLimit = this.getCoverageValue(limitedCoverage, chemPanelMatch.OrderCode, 'frequencyLimit');
         const coveredByDiagnosis = this.getCoverageValue(limitedCoverage, chemPanelMatch.OrderCode, 'coveredByDiagnosis');
         const diagnosisDisplayIndicator = this.getCoverageValue(limitedCoverage, chemPanelMatch.OrderCode, 'diagnosisDisplayIndicator');
         // Adding in frequency List
         if(frequencyLimit) {
-          console.log(chemPanelMatch, frequencyLimit)
           formattedTestResults.FormattedTestResults.tests.chems.frequencyList.push({
             chemName: chemPanelMatch.PanelName,
             orderCode: chemPanelMatch.OrderCode,
@@ -81,12 +78,10 @@ export class ApiTransformService {
 
       // Find in chemServices
       else if (chemServiceMatch &&  resultChem) {
-        console.log("entered2")
         const frequencyLimit = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'frequencyLimit');
         const coveredByDiagnosis = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'coveredByDiagnosis');
         const diagnosisDisplayIndicator = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'diagnosisDisplayIndicator');
         if(frequencyLimit) {
-          console.log(chemServiceMatch, frequencyLimit)
           formattedTestResults.FormattedTestResults.tests.chems.frequencyList.push({
             chemName: chemServiceMatch.ServiceName,
             orderCode: chemServiceMatch.OrderCode,
@@ -123,13 +118,7 @@ export class ApiTransformService {
       }
 
       // Other Tests (not in chems or nonChems)
-      console.log(chemPanelMatch , chemServiceMatch)
-      console.log((chemPanelMatch || chemServiceMatch) && !resultChem, resultChem)
-      console.log(nonChemMatch ,resultNonChem)
     if (((chemPanelMatch || chemServiceMatch) && !resultChem) || (nonChemMatch && !resultNonChem)) {
-      // console.log(chemPanelMatch , chemServiceMatch)
-      // console.log((chemPanelMatch || chemServiceMatch) && !resultChem, resultChem)
-      // console.log(nonChemMatch ,resultNonChem)
         if (nonChemMatch) {
             formattedTestResults.FormattedTestResults.otherTests['nonChems'].push({
                 chemName: nonChemMatch.ServiceName,
@@ -147,7 +136,6 @@ export class ApiTransformService {
     
     });
 
-    console.log(formattedTestResults,"hgfdctfvygbunhjhbgvfcdxsdrctvfbghnjbgvfcdxsdrcfvtbhnjmnhbgvfcdxsdcfvgbhnjhbgvfcdxsdcfvtbhunj")
 
     return formattedTestResults;
   }
@@ -157,7 +145,6 @@ export class ApiTransformService {
       return null; // Return null if limitedCoverage is not an array
     }
     const coverage = limitedCoverage.find((coverage: any) => coverage.orderCode === orderCode);
-    console.log(coverage ? coverage[key] : null, typeof(coverage ? coverage[key] : null), )
     if (coverage && typeof coverage[key] === "string") {
       return coverage[key].toLowerCase() === "true";
     }
@@ -187,4 +174,22 @@ export class ApiTransformService {
     ): boolean {
         return limitedCoverage?.some(coverage => coverage?.orderCode === nonChemMatch.OrderCode);
     }
+
+    private appendCommonSupportiveDiagnoses(limitedCoverages: any[]): any[] {
+      const commonDiagnoses: any[] = [];
+  
+      if (!limitedCoverages || !Array.isArray(limitedCoverages)) {
+          return commonDiagnoses;
+      }
+  
+      limitedCoverages.forEach((limitedCoverage) => {
+          if (limitedCoverage.commonSupportiveDiagnoses && Array.isArray(limitedCoverage.commonSupportiveDiagnoses)) {
+              limitedCoverage.commonSupportiveDiagnoses.forEach((diagnosis: any) => {
+                  commonDiagnoses.push(diagnosis);
+              });
+          }
+      });
+  
+      return commonDiagnoses;
+  }
 }

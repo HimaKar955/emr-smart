@@ -3362,15 +3362,15 @@ export const PricingResponse7 = {
                     "commonSupportiveDiagnoses": [
                         {
                             code: "j40",
-                            "description": "bronch, not specified"
+                            "description": "wronch, not specified"
                         },
                         {
-                            code: "j40",
-                            "description": "bronch, not specified"
+                            code: "a40",
+                            "description": "ironch, not specified"
                         },
                         {
-                            code: "j40",
-                            "description": "bronch, not specified"
+                            code: "b40",
+                            "description": "pronch, not specified"
                         }
 
                     ],
@@ -3386,16 +3386,16 @@ export const PricingResponse7 = {
                     "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
                     "commonSupportiveDiagnoses": [
                         {
-                            code: "j40",
-                            "description": "bronch, not specified"
+                            code: "b40",
+                            "description": "zronch, not specified"
                         },
                         {
-                            code: "j40",
-                            "description": "bronch, not specified"
+                            code: "c40",
+                            "description": "cronch, not specified"
                         },
                         {
-                            code: "j40",
-                            "description": "bronch, not specified"
+                            code: "z40",
+                            "description": "aronch, not specified"
                         }
 
                     ],
@@ -3835,31 +3835,31 @@ export const PricingResponse8 = {
                 "Target": ""
             },
             "limitedCoverage": [
-                // {
-                //     "orderCode": "483",
-                //     "serviceCode": "0000483",
-                //     "frequencyLimit": "false",
-                //     "frequencyAlertMessage": "",
-                //     "coveredByDiagnosis": "true",
-                //     "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
-                //     "commonSupportiveDiagnoses": [
-                //         {
-                //             code: "j40",
-                //             "description": "bronch, not specified"
-                //         },
-                //         {
-                //             code: "j40",
-                //             "description": "bronch, not specified"
-                //         },
-                //         {
-                //             code: "j40",
-                //             "description": "bronch, not specified"
-                //         }
+                {
+                    "orderCode": "483",
+                    "serviceCode": "0000483",
+                    "frequencyLimit": "false",
+                    "frequencyAlertMessage": "",
+                    "coveredByDiagnosis": "true",
+                    "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
+                    "commonSupportiveDiagnoses": [
+                        {
+                            code: "j40",
+                            "description": "bronch, not specified"
+                        },
+                        {
+                            code: "j40",
+                            "description": "bronch, not specified"
+                        },
+                        {
+                            code: "j40",
+                            "description": "bronch, not specified"
+                        }
 
-                //     ],
-                //     "diagnosisDisplayIndicator": "true",
-                //     "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support",
-                // },
+                    ],
+                    "diagnosisDisplayIndicator": "true",
+                    "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support",
+                },
                 {
                     "orderCode": "34392",
                     "serviceCode": "0000483",
