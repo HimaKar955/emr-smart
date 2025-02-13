@@ -18,23 +18,20 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class SelectDiagnosisComponent implements OnInit {
 
-  @Input() limitedCoverage: any; // Input data from parent component
+  @Input() limitedCoverage: any;
   @Input() policyUrl: any;
-  searchTerm: string = ''; // Search term for filtering
-  filteredData: any; // Filtered data to display in the table
-  descIsAscending = false; // Sorting order for description
-  codeIsAscending = false; // Sorting order for ICD-10 code
+  searchTerm: string = '';
+  filteredData: any;
+  descIsAscending = false;
+  codeIsAscending = false;
   selectedDiagnosis: any = null;
 
   ngOnInit() {
-    console.log(this.limitedCoverage);
-    console.log(this.policyUrl)
-    this.filteredData = this.limitedCoverage; // Initialize filteredData with the full dataset
+    this.filteredData = this.limitedCoverage;
   }
 
   // Filter the data based on the search term
   filteredCoverage() {
-    console.log("called");
     let filteredData = this.limitedCoverage;
     if (this.searchTerm) {
       filteredData = this.limitedCoverage.filter((test: { description: string; code: string; }) =>
@@ -42,36 +39,36 @@ export class SelectDiagnosisComponent implements OnInit {
         test.code.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
-    this.filteredData = filteredData; // Update filteredData
+    this.filteredData = filteredData;
   }
 
   // Toggle sorting for ICD-10 code
   toggleSortCode() {
-    this.codeIsAscending = !this.codeIsAscending; // Toggle sorting order
+    this.codeIsAscending = !this.codeIsAscending;
     this.filteredData.sort((a: any, b: any) => {
       if (this.codeIsAscending) {
-        return a.code.localeCompare(b.code); // Ascending order
+        return a.code.localeCompare(b.code);
       } else {
-        return b.code.localeCompare(a.code); // Descending order
+        return b.code.localeCompare(a.code);
       }
     });
   }
 
   // Toggle sorting for description
   toggleSortDesc() {
-    this.descIsAscending = !this.descIsAscending; // Toggle sorting order
+    this.descIsAscending = !this.descIsAscending;
     this.filteredData.sort((a: any, b: any) => {
       if (this.descIsAscending) {
-        return a.description.localeCompare(b.description); // Ascending order
+        return a.description.localeCompare(b.description);
       } else {
-        return b.description.localeCompare(a.description); // Descending order
+        return b.description.localeCompare(a.description);
       }
     });
   }
 
   // Select row and highlight
   selectDiagnosis(test: any) {
-    this.selectedDiagnosis = test; // Store selected diagnosis
+    this.selectedDiagnosis = test;
   }
 
   // Copy selected diagnosis code to clipboard
