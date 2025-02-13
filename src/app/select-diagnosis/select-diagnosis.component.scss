@@ -176,5 +176,19 @@
    /* Optional: Rounded corners */
   background-color:white; /* Optional: Very light blue background */
 }
+.column-header {
+  cursor: pointer; /* Indicates the header is clickable */
+  user-select: none; /* Prevents text selection */
+}
 
+.column-header span {
+  margin-left: 5px;
+  font-size: 12px;
+}
 
+/* Highlight Selected Row */
+.diagnosis-row.selected {
+  background-color: #d3e3fd !important; /* Light blue */
+  font-weight: bold;
+  border: 2px solid #4a90e2;
+}

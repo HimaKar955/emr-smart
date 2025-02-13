@@ -3366,11 +3366,11 @@ export const PricingResponse7 = {
                         },
                         {
                             code: "a40",
-                            "description": "ironch, not specified"
+                            "description": "wronchw, not specified"
                         },
                         {
                             code: "b40",
-                            "description": "pronch, not specified"
+                            "description": "wronchy, not specified"
                         }
 
                     ],
@@ -3841,7 +3841,7 @@ export const PricingResponse8 = {
                     "frequencyLimit": "false",
                     "frequencyAlertMessage": "",
                     "coveredByDiagnosis": "true",
-                    "policyURL": "https://www.quest diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
+                    "policyURL": "https://www.quest.diagnostics.com/content/dam/corporate/restricted/documents/mlcp/m",
                     "commonSupportiveDiagnoses": [
                         {
                             code: "j40",

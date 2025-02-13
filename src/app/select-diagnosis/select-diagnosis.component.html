@@ -16,45 +16,55 @@
     <div class="search-container">
         <h1 class="title">Iron Total</h1>
         <div class="search-box">
-            <input type="text" class="search-input" placeholder="Search for a diagnosis">
+            <input type="text" class="search-input" placeholder="Search for a diagnosis" [(ngModel)]="searchTerm" (ngModelChange)="filteredCoverage()">
             <div class="search-meta">
-                <span class="diagnosis-count"> Total results <br>
+                <span class="diagnosis-count">Total results: <br>
                     {{limitedCoverage?.length}} possible diagnoses.</span>
                 <div class="filter-options">
-                    <button class="filter-btn active">
-                        Commonly Used</button>
+                    <button class="filter-btn active">Commonly Used</button>
                     <button class="filter-btn">All</button>
                 </div>
             </div>
         </div>
     </div>
-    
-    
-      <!-- Diagnoses Table -->
-      <table class="diagnosis-table">
+    <table class="diagnosis-table">
         <thead>
-            <tr class="diagnosis-header">
-                <th class="column-header">Description <span class="ds-icon--arrow-up ds-black ds-font--24" aria-label="arrow-up"></span></th>
-                <th class="column-header">ICD-10 Code <span class="ds-icon--arrows-down-up ds-black ds-font--24" aria-label="arrows-down-up"></span></th>
-            </tr>
+          <tr class="diagnosis-header">
+            
+            <th class="column-header" (click)="toggleSortDesc()">
+              Description
+              <span *ngIf="descIsAscending">↑</span>
+              <span *ngIf="!descIsAscending">↓</span>
+            </th>
+            <th class="column-header" 
+            (click)="toggleSortCode()"
+            >ICD-10 Code
+                <span *ngIf="codeIsAscending">↑</span>
+              <span *ngIf="!codeIsAscending">↓</span>
+            </th>
+          </tr>
         </thead>
-        <tbody *ngFor="let test of limitedCoverage">
-            <tr class="diagnosis-row">
-                <td class="diagnosis-name">{{test.description}}</td>
-                <td class="diagnosis-code">{{test.code}}</td>
+        <tbody>
+            <tr class="diagnosis-row" 
+            *ngFor="let test of filteredData" 
+            [class.selected]="selectedDiagnosis === test"
+            (click)="selectDiagnosis(test)">
+                <td class="diagnosis-name">{{ test.description }}</td>
+                <td class="diagnosis-code">{{ test.code }}</td>
             </tr>
         </tbody>
-    </table>
+      </table>
+    
 
       <!-- Acknowledgment & Policy -->
       <p class="policy-text">
-          Limited Coverage Policy has been acknowledged. <a href="#" class="review-link">Review Policy</a>
+          Limited Coverage Policy has been acknowledged. <a [href]="policyUrl" class="review-link">Review Policy</a>
       </p>
 
       <!-- Buttons -->
       <div class="buttons">
           <button class="btn back-btn">Back</button>
-          <button class="btn primary-btn">Copy Diagnosis and Close</button>
+          <button class="btn primary-btn" (click)="copyDiagnosisCode()">Copy Diagnosis and Close</button>
       </div>
   </div>
 </div>

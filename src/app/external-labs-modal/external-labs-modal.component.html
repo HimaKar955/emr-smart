@@ -75,7 +75,7 @@
              <tr>
                <td colspan="3" *ngIf="chem.coveredByDiagnosis && chem.diagnosisDisplayIndicator">
                  <button mat-button class="ds-button --secondary --small review-button"
-                 (click)="showSelectDiagnosis=true" aria-label="button-text">
+                 (click)="selectDiagnosis(chem)" aria-label="button-text">
                  <span class="button-text">Review policy and confirm diagnosis</span>
                </button>
                </td>
@@ -135,7 +135,7 @@
                <tr>
                  <td colspan="3" *ngIf="chem.coveredByDiagnosis && chem.diagnosisDisplayIndicator">
                    <button mat-button class="ds-button --secondary --small review-button"
-                   (click)="showSelectDiagnosis=true" aria-label="button-text">
+                   (click)="selectDiagnosis(chem)" aria-label="button-text">
                    <span class="button-text">Review policy and confirm diagnosis</span>
                  </button>
                  </td>
@@ -272,7 +272,7 @@
   </ng-container>
  <ng-container *ngIf="showSelectDiagnosis">
    <mat-dialog-content class="ds-col-12 scrollable-content">
-     <app-select-diagnosis [limitedCoverage]="limitedCoverage"></app-select-diagnosis>
+     <app-select-diagnosis [limitedCoverage]="limitedCoverage" [policyUrl]="policyUrl"></app-select-diagnosis>
      </mat-dialog-content>
      </ng-container>
  </div>

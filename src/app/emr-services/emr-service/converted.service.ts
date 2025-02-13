@@ -27,7 +27,6 @@ export class ApiTransformService {
         },
         totalPrice : parseFloat(pricingResponse?.responseData?.elabs_response_payload?.pricing?.Chems?.PatientFeeInfo?.EstFee) || 0,
         isPrice: pricingResponse?.responseData?.elabs_response_payload?.pricing?.EstPatRespMsgCd === "Z",
-        limitedCoverage: this.appendCommonSupportiveDiagnoses(pricingResponse.responseData.elabs_response_payload?.limitedCoverage)
       }
     };
 
@@ -48,6 +47,11 @@ export class ApiTransformService {
      
       const chemPanelMatch = chemPanel?.find((c: any) => c?.OrderCode === orderCode);
       const chemServiceMatch = chemServices?.find((c: any) => c?.OrderCode === orderCode);
+      const commonSupportiveDiagnoses = this.getCommonSupportiveDiagnoses(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode);
+      const policyUrl = this.getPolicyUrl(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode);
+      console.log(commonSupportiveDiagnoses)
+      console.log(chemPanelMatch, "chemPanelMatch")
+      console.log(chemServiceMatch, "chemServiceMatch")
       // Find in chemPanel
 
       if (chemPanelMatch &&  resultChem) {
@@ -70,7 +74,9 @@ export class ApiTransformService {
             coveredByDiagnosis: coveredByDiagnosis,
             diagnosisDisplayIndicator: diagnosisDisplayIndicator,
             code: reason.code || null,
-            display: reason.display || null
+            display: reason.display || null,
+            limitedCoverage: chemPanelMatch.commonSupportiveDiagnoses,
+            policyUrl: policyUrl,
           });
         }
         
@@ -80,7 +86,7 @@ export class ApiTransformService {
       else if (chemServiceMatch &&  resultChem) {
         const frequencyLimit = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'frequencyLimit');
         const coveredByDiagnosis = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'coveredByDiagnosis');
-        const diagnosisDisplayIndicator = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'diagnosisDisplayIndicator');
+        const diagnosisDisplayIndicator = this.getCoverageValue(limitedCoverage, chemServiceMatch.OrderCode, 'diagnosisDisplayIndicator');     
         if(frequencyLimit) {
           formattedTestResults.FormattedTestResults.tests.chems.frequencyList.push({
             chemName: chemServiceMatch.ServiceName,
@@ -95,7 +101,9 @@ export class ApiTransformService {
             coveredByDiagnosis: coveredByDiagnosis,
             diagnosisDisplayIndicator: diagnosisDisplayIndicator,
             code: reason.code || null,
-            display: reason.display || null
+            display: reason.display || null,
+            limitedCoverage: commonSupportiveDiagnoses,
+            policyUrl: policyUrl,
           });
         }
       }
@@ -147,6 +155,32 @@ export class ApiTransformService {
     const coverage = limitedCoverage.find((coverage: any) => coverage.orderCode === orderCode);
     if (coverage && typeof coverage[key] === "string") {
       return coverage[key].toLowerCase() === "true";
+    }
+  
+    // Return null if no coverage is found or the key doesn't exist
+    return null;
+  }
+
+  getCommonSupportiveDiagnoses(limitedCoverage:any, orderCode:string) {
+    if (!Array.isArray(limitedCoverage)) {
+      return null; // Return null if limitedCoverage is not an array
+    }
+    const coverage = limitedCoverage.find((coverage: any) => coverage.orderCode === orderCode);
+    if (coverage && coverage.commonSupportiveDiagnoses) {
+      return coverage.commonSupportiveDiagnoses
+    }
+  
+    // Return null if no coverage is found or the key doesn't exist
+    return null;
+  }
+
+  getPolicyUrl(limitedCoverage:any, orderCode:string) {
+    if (!Array.isArray(limitedCoverage)) {
+      return null; // Return null if limitedCoverage is not an array
+    }
+    const coverage = limitedCoverage.find((coverage: any) => coverage.orderCode === orderCode);
+    if (coverage && coverage.policyURL) {
+      return coverage.policyURL
     }
   
     // Return null if no coverage is found or the key doesn't exist

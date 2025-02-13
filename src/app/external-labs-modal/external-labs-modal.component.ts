@@ -53,6 +53,7 @@ export class ExternalLabsModalComponent implements OnInit {
   serviceResponse: any[] = [];
   pricingResponse: any[] = [];
   limitedCoverage: any[] = [];
+  policyUrl: string | null = '';
 
   formattedTestResults: any;
 
@@ -78,7 +79,7 @@ export class ExternalLabsModalComponent implements OnInit {
     const pricingResponse = PricingResponse7;
     const formattedData = this.apiTransformService.transformResponses(serviceResponse, pricingResponse);
     this.formattedTestResults = formattedData?.FormattedTestResults;
-    this.limitedCoverage = formattedData?.FormattedTestResults.limitedCoverage;
+    console.log(this.formattedTestResults)
 
 
 
@@ -124,6 +125,12 @@ export class ExternalLabsModalComponent implements OnInit {
 
   onReview() {
     this.showPricing = false;
+  }
+
+  selectDiagnosis(chem: any) {
+    this.limitedCoverage = chem?.limitedCoverage;
+    this.policyUrl = chem?.policyUrl;
+    this.showSelectDiagnosis = true;
   }
 }
 
