@@ -1,7 +1,11 @@
-<div class="diagnosis-modal">
+<div>
   <!-- Header -->
-  <div class="modal-header">
-      <button class="logo-btn">Quest Logo</button>
+  <div class="dialog-header-container">
+    <div class="dialog-header">
+      <div class="ds-brand-wrapper --medium">
+        <img src="https://ds.cdn.questdiagnostics.com/assets/img/qd-brand--horizontal--green.svg" />
+      </div>
+    </div>
   </div>
 
   <!-- Diagnosis Information -->
@@ -27,8 +31,8 @@
             </div>
         </div>
     </div>
-    <mat-dialog-content class="ds-col-12 scrollable-content">
-    <table class="diagnosis-table">
+    <mat-dialog-content class="ds-col-12 dialog-content scrollable-content">
+        <table class="diagnosis-table">
         <thead>
           <tr class="diagnosis-header">
             
@@ -54,7 +58,7 @@
                 <td class="diagnosis-code">{{ test.code }}</td>
             </tr>
         </tbody>
-      </table>
+        </table>
     </mat-dialog-content>
     
 
