@@ -1,5 +1,4 @@
 .dialog-header-container {
-  padding: 24px;
   margin-bottom: 4px;
 
   .dialog-header {
@@ -16,19 +15,13 @@
   max-height: 300px;
 }
 
-/* Modal Styling */
-// .diagnosis-modal {
-//   width: 600px;
-//   height: 770px; /* Set fixed height */
-//   margin: auto;
-//   padding: 20px;
-//   padding-left: 0px;
-//   // border: 2px solid #000;
-//   background: #fff;
-//   // box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-//   font-family: Arial, sans-serif;
-//   overflow-y: auto; /* Enable scrolling if content exceeds height */
-// }
+.diagnosis-modal {
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  overflow-y: auto;
+}
 
 
 /* Header */
@@ -124,8 +117,6 @@
 /* Diagnoses Table */
 .diagnosis-table {
   width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
