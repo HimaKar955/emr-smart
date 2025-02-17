@@ -12,7 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { EmrService } from '../emr-services/emr-service/emr.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LCP_Text, PricingResponse7, ServiceResponse7 } from '../data/utils';
+import { LCP_Text, PricingResponse7, PricingResponse9, ServiceResponse7, ServiceResponse9 } from '../data/utils';
 import { environment } from '../../environments/environment';
 import { ApiTransformService } from '../emr-services/emr-service/converted.service';
 import { forkJoin } from 'rxjs';
@@ -75,8 +75,8 @@ export class ExternalLabsModalComponent implements OnInit {
     };
     const pricingPayload = { cds_hook_id: this.hookInstance };
 
-    const serviceResponse = ServiceResponse7;
-    const pricingResponse = PricingResponse7;
+    const serviceResponse = ServiceResponse9;
+    const pricingResponse = PricingResponse9;
     const formattedData = this.apiTransformService.transformResponses(serviceResponse, pricingResponse);
     this.formattedTestResults = formattedData?.FormattedTestResults;
     console.log(this.formattedTestResults)

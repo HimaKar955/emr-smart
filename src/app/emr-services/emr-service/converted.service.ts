@@ -47,8 +47,9 @@ export class ApiTransformService {
      
       const chemPanelMatch = chemPanel?.find((c: any) => c?.OrderCode === orderCode);
       const chemServiceMatch = chemServices?.find((c: any) => c?.OrderCode === orderCode);
-      const commonSupportiveDiagnoses = this.getCommonSupportiveDiagnoses(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode);
-      const policyUrl = this.getPolicyUrl(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode);
+      const nonChemMatch = nonChemServices?.find((c: any) => c.OrderCode === orderCode);
+      const commonSupportiveDiagnoses = this.getCommonSupportiveDiagnoses(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode || nonChemMatch?.OrderCode);
+      const policyUrl = this.getPolicyUrl(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode || nonChemMatch?.OrderCode);
       console.log(commonSupportiveDiagnoses)
       console.log(chemPanelMatch, "chemPanelMatch")
       console.log(chemServiceMatch, "chemServiceMatch")
@@ -75,7 +76,7 @@ export class ApiTransformService {
             diagnosisDisplayIndicator: diagnosisDisplayIndicator,
             code: reason.code || null,
             display: reason.display || null,
-            limitedCoverage: chemPanelMatch.commonSupportiveDiagnoses,
+            limitedCoverage: commonSupportiveDiagnoses,
             policyUrl: policyUrl,
           });
         }
@@ -109,7 +110,7 @@ export class ApiTransformService {
       }
 
       // Find in nonChems
-      const nonChemMatch = nonChemServices?.find((c: any) => c.OrderCode === orderCode);
+      console.log(nonChemMatch)
       const resultNonChem = nonChemMatch && this.isNonChemMatchInLimitedCoverage(nonChemMatch, limitedCoverage) || false;
       if (nonChemMatch && resultNonChem) {
         formattedTestResults.FormattedTestResults.tests['nonChems'].push({
@@ -120,7 +121,8 @@ export class ApiTransformService {
           diagnosisDisplayIndicator: this.getCoverageValue(limitedCoverage, nonChemMatch.OrderCode, 'diagnosisDisplayIndicator'),
           code: reason.code || null,
           display: reason.display || null,
-          price: parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0
+          price: parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0,
+          limitedCoverage: commonSupportiveDiagnoses,
         });
         formattedTestResults.FormattedTestResults.totalPrice += parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0;
       }

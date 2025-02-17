@@ -4790,3 +4790,672 @@ export const PricingResponseCodeSetup = {
     },
     "message": "Response Generated"
 }
+
+export const PricingResponse9 = {
+    "httpStatus": "OK",
+    "responseData": {
+        "elabs_response_id": 3385,
+        "elabs_request_id": 608,
+        "cdsHookId": "4be6d050-64da-11ef-b2a6-005056be447d",
+        "elabs_response_payload": {
+            "success": true,
+            "performingSite": "STL",
+            "client": "544800",
+            "legalEntity": "STL",
+            "thirdPartyFormsCode": "RMM",
+            "insuranceCarrierName": "MEDICARE",
+            "token": "3A213648-E982-11EF-8A74-DA0262A0C8B5",
+            "pricingStatus": "enabled",
+            "pricing": {
+                "Chems": {
+                    "ChemServiceCode": "0034714",
+                    "ChemServiceName": "COMP METAB PNL",
+                    "ChemPanel": [
+                        {
+                            "PanelCode": "0010231",
+                            "PanelName": "COMP METAB PNL",
+                            "OrderCode": "10231",
+                            "ChemService": [
+                                {
+                                    "ServiceCode": "0000223",
+                                    "ServiceName": "ALBUMIN",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000234",
+                                    "ServiceName": "ALKALINE PHOSPHATASE",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000822",
+                                    "ServiceName": "AST",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000823",
+                                    "ServiceName": "ALT",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000287",
+                                    "ServiceName": "BILIRUBIN, TOTAL",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000294",
+                                    "ServiceName": "UREA NITROGEN (BUN)",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000303",
+                                    "ServiceName": "CALCIUM",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000330",
+                                    "ServiceName": "CHLORIDE",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000375",
+                                    "ServiceName": "CREATININE",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000310",
+                                    "ServiceName": "CARBON DIOXIDE",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000483",
+                                    "ServiceName": "GLUCOSE, SERUM",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000733",
+                                    "ServiceName": "POTASSIUM",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000754",
+                                    "ServiceName": "PROTEIN, TOTAL",
+                                    "OrderCode": null
+                                },
+                                {
+                                    "ServiceCode": "0000836",
+                                    "ServiceName": "SODIUM",
+                                    "OrderCode": null
+                                }
+                            ]
+                        }
+                    ],
+                    "ChemService": [],
+                    "ClientFeeInfo": {
+                        "Comment": "LIST       ",
+                        "Fee": "00003.50"
+                    },
+                    "PatientFeeInfo": {
+                        "Comment": "LIST",
+                        "EstFee": "00000.00",
+                        "Fee": "00100.75"
+                    },
+                    "ReasonCode": {},
+                    "RemarkCode": {}
+                },
+                "NonChems": {
+                    "Profile": [],
+                    "Service": [
+                        {
+                            "ClientFeeInfo": {
+                                "Comment": "LIST                ",
+                                "Fee": "00009.00"
+                            },
+                            "PatientFeeInfo": {
+                                "Comment": "LIST",
+                                "EstFee": "00000.00",
+                                "Fee": "00276.66"
+                            },
+                            "ReasonCode": {},
+                            "RemarkCode": {},
+                            "ServiceCode": "0017306",
+                            "ServiceName": "VIT D,25-OH,TOTAL,IA",
+                            "OrderCode": "17306"
+                        },
+                        {
+                            "ClientFeeInfo": {
+                                "Comment": "LIST                ",
+                                "Fee": "00005.00"
+                            },
+                            "PatientFeeInfo": {
+                                "Comment": "LIST",
+                                "EstFee": "00000.00",
+                                "Fee": "00169.86"
+                            },
+                            "ReasonCode": {},
+                            "RemarkCode": {},
+                            "ServiceCode": "0005363",
+                            "ServiceName": "PSA, TOTAL",
+                            "OrderCode": "5363"
+                        }
+                    ]
+                },
+                "ClientInfo": {
+                    "BillToClientNbr": "00544800",
+                    "ClientNbr": "00544800",
+                    "Discount": "00",
+                    "FeeSchedule": "37",
+                    "GroupFlag": "P",
+                    "LegalEnt": "STL",
+                    "Name": "MERCY HOSPITAL ST LOUIS   "
+                },
+                "ClientOrderPriceTotal": "0000017.50 ",
+                "PartialPatientOrderPrice": "",
+                "PatientOrderPriceTotal": "0000547.27",
+                "EstPatRespAmt": "00000.00",
+                "EstPatRespMsg": "EasyPay estimate not available for ins or group",
+                "EstPatRespMsgCd": "Z",
+                "EstPatRespSource": "Quest",
+                "FormCode": "RMM",
+                "FormCodeProvName": "MEDICARE",
+                "Function": "",
+                "Error": "",
+                "Message": "",
+                "_Module": "",
+                "PatientInfo": {
+                    "Discount": "00",
+                    "FeeSchedule": "37"
+                },
+                "PmtProcessType": " ",
+                "Resp": "00000000",
+                "Resp2": "00000000",
+                "RespCode": "000",
+                "Target": ""
+            },
+            "limitedCoverage": [
+                {
+                    "orderCode": "5363",
+                    "serviceCode": "0005363",
+                    "frequencyLimit": "false",
+                    "frequencyAlertMessage": "This test has a prescribed frequency limitation under the Limited Coverage Policy.",
+                    "coveredByDiagnosis": "true",
+                    "policyURL": "https://www.questdiagnostics.com/content/dam/corporate/restricted/documents/mlcp/mlcp/national-guides/national-mlcp-190-31-prostate_specific_antigen/National---MLCP---190-31---Prostate-Specific-Antigen.pdf",
+                    "commonSupportiveDiagnoses": [
+                        {
+                            "code": "Z125",
+                            "description": "Encounter for screening for malignant neoplasm of prostate"
+                        },
+                        {
+                            "code": "N400",
+                            "description": "Benign prostatic hyperplasia without lower urinry tract symp"
+                        },
+                        {
+                            "code": "R9720",
+                            "description": "Elevated prostate specific antigen [PSA]"
+                        },
+                        {
+                            "code": "C61",
+                            "description": "Malignant neoplasm of prostate"
+                        },
+                        {
+                            "code": "R351",
+                            "description": "Nocturia"
+                        },
+                        {
+                            "code": "N401",
+                            "description": "Benign prostatic hyperplasia with lower urinary tract symp"
+                        },
+                        {
+                            "code": "R350",
+                            "description": "Frequency of micturition"
+                        },
+                        {
+                            "code": "N419",
+                            "description": "Inflammatory disease of prostate, unspecified"
+                        },
+                        {
+                            "code": "N429",
+                            "description": "Disorder of prostate, unspecified"
+                        },
+                        {
+                            "code": "R3129",
+                            "description": "Other microscopic hematuria"
+                        },
+                        {
+                            "code": "R319",
+                            "description": "Hematuria, unspecified"
+                        },
+                        {
+                            "code": "Z8546",
+                            "description": "Personal history of malignant neoplasm of prostate"
+                        }
+                    ],
+                    "diagnosisDisplayIndicator": "true",
+                    "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support the medical necessity of the test."
+                },
+                {
+                    "orderCode": "17306",
+                    "serviceCode": "0017306",
+                    "frequencyLimit": "false",
+                    "frequencyAlertMessage": "",
+                    "coveredByDiagnosis": "true",
+                    "policyURL": "https://www.questdiagnostics.com/content/dam/corporate/restricted/documents/mlcp/mlcp/j5-wps/j5_wps-mlcp-l34658-vitamin_d-25_hydroxy/J5-WPS---MLCP---L34658---Vitamin-D-25-Hydroxy.pdf",
+                    "commonSupportiveDiagnoses": [
+                        {
+                            "code": "E559",
+                            "description": "Vitamin D deficiency, unspecified"
+                        },
+                        {
+                            "code": "N1830",
+                            "description": "Chronic kidney disease, stage 3 unspecified"
+                        },
+                        {
+                            "code": "N184",
+                            "description": "Chronic kidney disease, stage 4 (severe)"
+                        },
+                        {
+                            "code": "M810",
+                            "description": "Age-related osteoporosis w/o current pathological fracture"
+                        },
+                        {
+                            "code": "Z79899",
+                            "description": "Other long term (current) drug therapy"
+                        },
+                        {
+                            "code": "N1832",
+                            "description": "Chronic kidney disease, stage 3b"
+                        },
+                        {
+                            "code": "N1831",
+                            "description": "Chronic kidney disease, stage 3a"
+                        },
+                        {
+                            "code": "N2581",
+                            "description": "Secondary hyperparathyroidism of renal origin"
+                        },
+                        {
+                            "code": "E8352",
+                            "description": "Hypercalcemia"
+                        },
+                        {
+                            "code": "M8580",
+                            "description": "Oth disrd of bone density and structure, unspecified site"
+                        },
+                        {
+                            "code": "E210",
+                            "description": "Primary hyperparathyroidism"
+                        },
+                        {
+                            "code": "E8339",
+                            "description": "Other disorders of phosphorus metabolism"
+                        },
+                        {
+                            "code": "K760",
+                            "description": "Fatty (change of) liver, not elsewhere classified"
+                        },
+                        {
+                            "code": "E8351",
+                            "description": "Hypocalcemia"
+                        },
+                        {
+                            "code": "N185",
+                            "description": "Chronic kidney disease, stage 5"
+                        },
+                        {
+                            "code": "M3214",
+                            "description": "Glomerular disease in systemic lupus erythematosus"
+                        },
+                        {
+                            "code": "E892",
+                            "description": "Postprocedural hypoparathyroidism"
+                        },
+                        {
+                            "code": "Z9884",
+                            "description": "Bariatric surgery status"
+                        },
+                        {
+                            "code": "D134",
+                            "description": "Benign neoplasm of liver"
+                        },
+                        {
+                            "code": "D860",
+                            "description": "Sarcoidosis of lung"
+                        },
+                        {
+                            "code": "E200",
+                            "description": "Idiopathic hypoparathyroidism"
+                        },
+                        {
+                            "code": "E211",
+                            "description": "Secondary hyperparathyroidism, not elsewhere classified"
+                        },
+                        {
+                            "code": "E673",
+                            "description": "Hypervitaminosis D"
+                        },
+                        {
+                            "code": "E8330",
+                            "description": "Disorder of phosphorus metabolism, unspecified"
+                        },
+                        {
+                            "code": "K5090",
+                            "description": "Crohns disease, unspecified, without complications"
+                        },
+                        {
+                            "code": "K5190",
+                            "description": "Ulcerative colitis, unspecified, without complications"
+                        },
+                        {
+                            "code": "K7460",
+                            "description": "Unspecified cirrhosis of liver"
+                        },
+                        {
+                            "code": "K7581",
+                            "description": "Nonalcoholic steatohepatitis (NASH)"
+                        },
+                        {
+                            "code": "K9049",
+                            "description": "Malabsorption due to intolerance, not elsewhere classified"
+                        },
+                        {
+                            "code": "K912",
+                            "description": "Postsurgical malabsorption, not elsewhere classified"
+                        }
+                    ],
+                    "diagnosisDisplayIndicator": "true",
+                    "coveredByDiagnosisMessage": "This test is only covered by specific diagnoses that support the medical necessity of the test."
+                }
+            ]
+        },
+        "elabs_response_token": "3A213648-E982-11EF-8A74-DA0262A0C8B5",
+        "elabs_call_type": "Primary",
+        "created_date": "2025-02-12T08:45:01.000+00:00"
+    },
+    "message": "Response Generated"
+}
+
+export const ServiceResponse9 = {
+    "httpStatus": "OK",
+    "responseData": {
+        "resources_id": 8423,
+        "cdsHookId": "4be6d050-64da-11ef-b2a6-005056be447d",
+        "fhir_resource_id": "eop3o7jtcOP7pPKDMlrwa7i0Zt-qiJu0KUKgAjHkkZX7dJ0vqXYxnJPJ9fZJeWi06Pfx0h0CI.fEg8fz3wsneq7S8oecGpQcGePeeGs2dLahYyvb52Xxi3Xuh-bSgJP0Gq5mNbsiMx1uxpVOMP6U2d3PdnWKeFJSPILtdmjJxlsXsUaZtA9c8Wzwm0.ghaDLa3",
+        "fhir_resource_type": "ServiceRequest",
+        "ServiceRequest": [
+            {
+                "resourceType": "ServiceRequest",
+                "id": "eop3o7jtcOP7pPKDMlrwa7iRrrALhtZ4Seifvp8w4Mci16mpRC.E89-1tvlyLVnpOnNQsqPFZ8JhTPKjM7Td77Nr.vMvBlzQ9SOj1fbTaxBfgJxvM7GPZ69vO6BOuTuBmPxzVKMw4GzCbLvq8cj02HD1MQTEmpkGYEMyq5RL.0iWAzpBZYfe6YyNRiawMihi33",
+                "status": "draft",
+                "intent": "order",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "373864002",
+                                "display": "Outpatient"
+                            }
+                        ],
+                        "text": "Outpatient"
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://www.ama-assn.org/go/cpt",
+                            "code": "82306",
+                            "display": "PR ASSAY OF VIT D,CALCIFEDIOL W FRACTIONS, IF PERFORMED"
+                        },
+                        {
+                            "system": "http://open.epic.com/FHIR/StructureDefinition/cds-hooks-unsigned-order-procedure-mpi-id/25",
+                            "code": "17306",
+                            "display": null
+                        }
+                    ],
+                    "text": "Vitamin D 25 hydroxy"
+                },
+                "quantityQuantity": {
+                    "value": 1
+                },
+                "subject": {
+                    "reference": "Patient/eXFljJT8WxVd2PjwvPAGR1A3",
+                    "display": "Clin Doc, Henry"
+                },
+                "encounter": {
+                    "reference": "Encounter/eruEuMi4aq83kprM-h4TP6A3",
+                    "identifier": {
+                        "use": "usual",
+                        "system": "urn:oid:1.2.840.114350.1.13.0.1.7.3.698084.8",
+                        "value": "34835"
+                    },
+                    "display": "Office Visit"
+                },
+                "occurrenceTiming": {
+                    "repeat": {
+                        "boundsPeriod": {
+                            "start": "2024-08-27T05:00:00Z"
+                        },
+                        "count": 1
+                    }
+                },
+                "requester": {
+                    "reference": "Practitioner/eM5CWtq15N0WJeuCet5bJlQ3",
+                    "display": "Physician Family Medicine, MD",
+                    "type": "Practitioner"
+                },
+                "reasonCode": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "305058001",
+                                "display": "Patient encounter status (finding)"
+                            },
+                            {
+                                "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                                "code": "V76.44",
+                                "display": "Special screening for malignant neoplasm of prostate"
+                            },
+                            {
+                                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                                "code": "Z12.5",
+                                "display": "Special screening for malignant neoplasm of prostate"
+                            }
+                        ],
+                        "text": "Special screening for malignant neoplasm of prostate"
+                    }
+                ],
+                "reasonReference": [
+                    {
+                        "reference": "Condition/eg2Kc-T-luU-cG51UdBAOj.DzBDXRPMosR4DnHDTmtQHXECNZFS88-rO5EqpmQTxyn9lIicVSb66G.MS-Dl3MzQ3",
+                        "display": "Special screening for malignant neoplasm of prostate",
+                        "type": "Condition"
+                    }
+                ]
+            },
+            {
+                "resourceType": "ServiceRequest",
+                "id": "eop3o7jtcOP7pPKDMlrwa7uosg-Ox8L0N.61VKeeK0R2GKbwd6Pb8cVJeiNu87TBfNyqyVGIUjhCw9WS1C6vDZexnwXXDf8RJqtMEZhJPlHsneL2li41h89vdCkf3XRm0YSb3zOwnNPyQFp3GwLlLTfUrqsYq6qH5w29YHRpFeuz9BQicNeaAOj-w9UVRlX-S3",
+                "status": "draft",
+                "intent": "order",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "373864002",
+                                "display": "Outpatient"
+                            }
+                        ],
+                        "text": "Outpatient"
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://www.ama-assn.org/go/cpt",
+                            "code": "84153",
+                            "display": "PR PROSTATE SPECIFIC ANTIGEN,TOTAL"
+                        },
+                        {
+                            "system": "http://open.epic.com/FHIR/StructureDefinition/cds-hooks-unsigned-order-procedure-mpi-id/25",
+                            "code": "5363",
+                            "display": null
+                        }
+                    ],
+                    "text": "PSA, total and free"
+                },
+                "quantityQuantity": {
+                    "value": 1
+                },
+                "subject": {
+                    "reference": "Patient/eXFljJT8WxVd2PjwvPAGR1A3",
+                    "display": "Clin Doc, Henry"
+                },
+                "encounter": {
+                    "reference": "Encounter/eruEuMi4aq83kprM-h4TP6A3",
+                    "identifier": {
+                        "use": "usual",
+                        "system": "urn:oid:1.2.840.114350.1.13.0.1.7.3.698084.8",
+                        "value": "34835"
+                    },
+                    "display": "Office Visit"
+                },
+                "occurrenceTiming": {
+                    "repeat": {
+                        "boundsPeriod": {
+                            "start": "2024-08-27T05:00:00Z"
+                        },
+                        "count": 1
+                    }
+                },
+                "requester": {
+                    "reference": "Practitioner/eM5CWtq15N0WJeuCet5bJlQ3",
+                    "display": "Physician Family Medicine, MD",
+                    "type": "Practitioner"
+                },
+                "reasonCode": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "243881001",
+                                "display": "Special examination status (finding)"
+                            },
+                            {
+                                "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                                "code": "V70.3",
+                                "display": "Routine sports physical exam"
+                            },
+                            {
+                                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                                "code": "",
+                                "display": "Routine sports physical exam"
+                            }
+                        ],
+                        "text": "Routine sports physical exam"
+                    }
+                ],
+                "reasonReference": [
+                    {
+                        "reference": "Condition/eg2Kc-T-luU-cG51UdBAOjz34T-1cQB7AxbVO3VUDSnaN1EZ7PRkEf.g91t7s8NM9l17GnLQQmAt94F9Pv0ghaQ3",
+                        "display": "Routine sports physical exam",
+                        "type": "Condition"
+                    }
+                ]
+            },
+            {
+                "resourceType": "ServiceRequest",
+                "id": "eop3o7jtcOP7pPKDMlrwa7i0Zt-qiJu0KUKgAjHkkZX7dJ0vqXYxnJPJ9fZJeWi06Pfx0h0CI.fEg8fz3wsneq7S8oecGpQcGePeeGs2dLahYyvb52Xxi3Xuh-bSgJP0Gq5mNbsiMx1uxpVOMP6U2d3PdnWKeFJSPILtdmjJxlsXsUaZtA9c8Wzwm0.ghaDLa3",
+                "status": "draft",
+                "intent": "order",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "373864002",
+                                "display": "Outpatient"
+                            }
+                        ],
+                        "text": "Outpatient"
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://www.ama-assn.org/go/cpt",
+                            "code": "80053",
+                            "display": "PR METABOLIC PANEL,COMPREHENSIVE"
+                        },
+                        {
+                            "system": "http://open.epic.com/FHIR/StructureDefinition/cds-hooks-unsigned-order-procedure-mpi-id/25",
+                            "code": "10231",
+                            "display": null
+                        }
+                    ],
+                    "text": "Comprehensive metabolic panel"
+                },
+                "quantityQuantity": {
+                    "value": 1
+                },
+                "subject": {
+                    "reference": "Patient/eXFljJT8WxVd2PjwvPAGR1A3",
+                    "display": "Clin Doc, Henry"
+                },
+                "encounter": {
+                    "reference": "Encounter/eruEuMi4aq83kprM-h4TP6A3",
+                    "identifier": {
+                        "use": "usual",
+                        "system": "urn:oid:1.2.840.114350.1.13.0.1.7.3.698084.8",
+                        "value": "34835"
+                    },
+                    "display": "Office Visit"
+                },
+                "occurrenceTiming": {
+                    "repeat": {
+                        "boundsPeriod": {
+                            "start": "2024-08-27T05:00:00Z"
+                        },
+                        "count": 1
+                    }
+                },
+                "requester": {
+                    "reference": "Practitioner/eM5CWtq15N0WJeuCet5bJlQ3",
+                    "display": "Physician Family Medicine, MD",
+                    "type": "Practitioner"
+                },
+                "reasonCode": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "243881001",
+                                "display": "Special examination status (finding)"
+                            },
+                            {
+                                "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                                "code": "V70.3",
+                                "display": "Routine sports physical exam"
+                            },
+                            {
+                                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                                "code": "",
+                                "display": "Routine sports physical exam"
+                            }
+                        ],
+                        "text": "Routine sports physical exam"
+                    }
+                ],
+                "reasonReference": [
+                    {
+                        "reference": "Condition/eg2Kc-T-luU-cG51UdBAOjz34T-1cQB7AxbVO3VUDSnaN1EZ7PRkEf.g91t7s8NM9l17GnLQQmAt94F9Pv0ghaQ3",
+                        "display": "Routine sports physical exam",
+                        "type": "Condition"
+                    }
+                ]
+            }
+        ],
+        "created_date": "2025-02-12T08:45:01.000+00:00"
+    },
+    "message": "Response Generated"
+}
