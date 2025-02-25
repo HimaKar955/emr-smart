@@ -25,8 +25,8 @@
                 <span class="diagnosis-count">Total results: <br>
                     {{limitedCoverage?.length}} possible diagnoses.</span>
                 <div class="filter-options">
-                    <button class="filter-btn active">Commonly Used</button>
-                    <button class="filter-btn">All</button>
+                  <button class="filter-btn active" (click)="selectedFilter = 'limited'; filteredCoverage()">Commonly Used</button>
+                  <button class="filter-btn" (click)="selectedFilter = 'all'; filteredCoverage()">All</button>                  
                 </div>
             </div>
         </div>

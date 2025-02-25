@@ -19,12 +19,15 @@ import { MatIconModule } from '@angular/material/icon';
 export class SelectDiagnosisComponent implements OnInit {
 
   @Input() limitedCoverage: any;
+  @Input() additionalSupportiveDiagnosis: any;
+  @Input() AdditionalCoverage:any;
   @Input() policyUrl: any;
   searchTerm: string = '';
   filteredData: any;
   descIsAscending = false;
   codeIsAscending = false;
   selectedDiagnosis: any = null;
+  selectedFilter = 'limited';
 
   ngOnInit() {
     this.filteredData = this.limitedCoverage;
@@ -32,15 +35,23 @@ export class SelectDiagnosisComponent implements OnInit {
 
   // Filter the data based on the search term
   filteredCoverage() {
-    let filteredData = this.limitedCoverage;
+    let dataToFilter = this.limitedCoverage; // Default to limited coverage
+  
+    // Check if "All" is selected, then use additionalSupportiveDiagnosis
+    if (this.selectedFilter === 'all' && this.additionalSupportiveDiagnosis) {
+      dataToFilter = this.additionalSupportiveDiagnosis;
+    }
+  
     if (this.searchTerm) {
-      filteredData = this.limitedCoverage.filter((test: { description: string; code: string; }) =>
+      this.filteredData = dataToFilter.filter((test: { description: string; code: string; }) =>
         test.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         test.code.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
+    } else {
+      this.filteredData = dataToFilter; // Reset to full list if no search term
     }
-    this.filteredData = filteredData;
   }
+  
 
   // Toggle sorting for ICD-10 code
   toggleSortCode() {

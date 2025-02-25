@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ApiTransformService {
 
-  transformResponses(serviceResponse: any, pricingResponse: any) {
+  transformResponses(serviceResponse: any, pricingResponse: any, additionalSupportiveDiagnosis:any) {
     const formattedTestResults: any = {
       FormattedTestResults: {
         tests: {
@@ -49,6 +49,7 @@ export class ApiTransformService {
       const chemServiceMatch = chemServices?.find((c: any) => c?.OrderCode === orderCode);
       const nonChemMatch = nonChemServices?.find((c: any) => c.OrderCode === orderCode);
       const commonSupportiveDiagnoses = this.getCommonSupportiveDiagnoses(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode || nonChemMatch?.OrderCode);
+      const additionalSupportiveDiagnoses =this.getAdditionalSupportiveDiagnoses(additionalSupportiveDiagnosis.orderCodes, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode || nonChemMatch?.OrderCode)
       const policyUrl = this.getPolicyUrl(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode || nonChemMatch?.OrderCode);
       console.log(commonSupportiveDiagnoses)
       console.log(chemPanelMatch, "chemPanelMatch")
@@ -77,6 +78,7 @@ export class ApiTransformService {
             code: reason.code || null,
             display: reason.display || null,
             limitedCoverage: commonSupportiveDiagnoses,
+            additionalCoverage: additionalSupportiveDiagnoses,
             policyUrl: policyUrl,
           });
         }
@@ -104,6 +106,7 @@ export class ApiTransformService {
             code: reason.code || null,
             display: reason.display || null,
             limitedCoverage: commonSupportiveDiagnoses,
+            additionalCoverage: additionalSupportiveDiagnoses,
             policyUrl: policyUrl,
           });
         }
@@ -123,6 +126,7 @@ export class ApiTransformService {
           display: reason.display || null,
           price: parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0,
           limitedCoverage: commonSupportiveDiagnoses,
+          additionalCoverage: additionalSupportiveDiagnoses,
         });
         formattedTestResults.FormattedTestResults.totalPrice += parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0;
       }
@@ -170,6 +174,19 @@ export class ApiTransformService {
     const coverage = limitedCoverage.find((coverage: any) => coverage.orderCode === orderCode);
     if (coverage && coverage.commonSupportiveDiagnoses) {
       return coverage.commonSupportiveDiagnoses
+    }
+  
+    // Return null if no coverage is found or the key doesn't exist
+    return null;
+  }
+
+  getAdditionalSupportiveDiagnoses(additionalCoverage:any, orderCode:string) {
+    if (!Array.isArray(additionalCoverage)) {
+      return null; // Return null if additionalCoverage is not an array
+    }
+    const coverage = additionalCoverage.find((coverage: any) => coverage.orderCode === orderCode);
+    if (coverage && coverage.additionalSupportiveDiagnoses) {
+      return coverage.additionalSupportiveDiagnoses
     }
   
     // Return null if no coverage is found or the key doesn't exist

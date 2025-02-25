@@ -17,6 +17,7 @@ import { environment } from '../../environments/environment';
 import { ApiTransformService } from '../emr-services/emr-service/converted.service';
 import { forkJoin } from 'rxjs';
 import { SelectDiagnosisComponent } from '../select-diagnosis/select-diagnosis.component';
+import { AdditionalSupportiveDiagnosis } from '../data/additionalSupportiveDiagnoses';
 // import { ApiTransformService } from '../emr-services/emr-service/converted.service';
 // import { PricingResponseCodeSetup1, ServiceResponseCodeSetup1 } from '../data/refine.util';
 
@@ -53,6 +54,7 @@ export class ExternalLabsModalComponent implements OnInit {
   serviceResponse: any[] = [];
   pricingResponse: any[] = [];
   limitedCoverage: any[] = [];
+  additionalSupportiveDiagnosis: any[] = [];
   policyUrl: string | null = '';
 
   formattedTestResults: any;
@@ -77,7 +79,8 @@ export class ExternalLabsModalComponent implements OnInit {
 
     const serviceResponse = ServiceResponse9;
     const pricingResponse = PricingResponse9;
-    const formattedData = this.apiTransformService.transformResponses(serviceResponse, pricingResponse);
+    const additionalSupportiveDiagnosis =  AdditionalSupportiveDiagnosis;
+    const formattedData = this.apiTransformService.transformResponses(serviceResponse, pricingResponse, additionalSupportiveDiagnosis);
     this.formattedTestResults = formattedData?.FormattedTestResults;
     console.log(this.formattedTestResults)
 
@@ -129,6 +132,7 @@ export class ExternalLabsModalComponent implements OnInit {
 
   selectDiagnosis(chem: any) {
     this.limitedCoverage = chem?.limitedCoverage;
+    this.additionalSupportiveDiagnosis = chem?.additionalCoverage;
     this.policyUrl = chem?.policyUrl;
     this.showSelectDiagnosis = true;
   }
