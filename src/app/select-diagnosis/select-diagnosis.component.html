@@ -62,17 +62,21 @@
     </mat-dialog-content>
     
 
-      <!-- Acknowledgment & Policy -->
-      <p class="policy-text">
-          Limited Coverage Policy has been acknowledged. <a [href]="policyUrl" class="review-link">Review Policy</a>
-      </p>
+    <!-- Acknowledgment & Policy -->
+    <p class="policy-text">
+      Limited Coverage Policy has been acknowledged. 
+      <a href="javascript:void(0)" class="review-link" (click)="openPolicyPopup()">Review Policy</a>
+    </p>
+      
 
-      <!-- Buttons -->
-      <div class="buttons">
-          <button class="btn back-btn">Back</button>
-          <button class="btn primary-btn" (click)="copyDiagnosisCode()">Copy Diagnosis and Close</button>
-      </div>
+    <!-- Buttons -->
+    <div class="buttons">
+        <button class="btn back-btn" (click)="onBack()">Back</button> <!-- Call onBack() -->
+        <button type="button" class="btn primary-btn" 
+                [disabled]="!selectedDiagnosis" 
+                (click)="copyDiagnosisCode()">
+          Copy Diagnosis and Close
+        </button>
+    </div>
   </div>
 </div>
-  
-  

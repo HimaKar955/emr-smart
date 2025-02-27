@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,8 +20,10 @@ export class SelectDiagnosisComponent implements OnInit {
 
   @Input() limitedCoverage: any;
   @Input() additionalSupportiveDiagnosis: any;
-  @Input() AdditionalCoverage:any;
+  @Input() AdditionalCoverage: any;
   @Input() policyUrl: any;
+  @Output() close = new EventEmitter<void>(); // Add this line
+
   searchTerm: string = '';
   filteredData: any;
   descIsAscending = false;
@@ -36,12 +38,12 @@ export class SelectDiagnosisComponent implements OnInit {
   // Filter the data based on the search term
   filteredCoverage() {
     let dataToFilter = this.limitedCoverage; // Default to limited coverage
-  
+
     // Check if "All" is selected, then use additionalSupportiveDiagnosis
     if (this.selectedFilter === 'all' && this.additionalSupportiveDiagnosis) {
       dataToFilter = this.additionalSupportiveDiagnosis;
     }
-  
+
     if (this.searchTerm) {
       this.filteredData = dataToFilter.filter((test: { description: string; code: string; }) =>
         test.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -51,7 +53,6 @@ export class SelectDiagnosisComponent implements OnInit {
       this.filteredData = dataToFilter; // Reset to full list if no search term
     }
   }
-  
 
   // Toggle sorting for ICD-10 code
   toggleSortCode() {
@@ -89,8 +90,15 @@ export class SelectDiagnosisComponent implements OnInit {
       }).catch(err => {
         console.error('Failed to copy text: ', err);
       });
-    } else {
-      alert('Please select a diagnosis first!');
     }
+  }
+
+  // Emit the close event when the back button is clicked
+  onBack() {
+    this.close.emit(); // Emit the event
+  }
+
+  openPolicyPopup() {
+    window.open(this.policyUrl, 'PolicyPopup', 'width=800,height=600,scrollbars=yes,resizable=yes');
   }
 }

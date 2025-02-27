@@ -51,9 +51,6 @@ export class ApiTransformService {
       const commonSupportiveDiagnoses = this.getCommonSupportiveDiagnoses(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode || nonChemMatch?.OrderCode);
       const additionalSupportiveDiagnoses =this.getAdditionalSupportiveDiagnoses(additionalSupportiveDiagnosis.orderCodes, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode || nonChemMatch?.OrderCode)
       const policyUrl = this.getPolicyUrl(limitedCoverage, chemServiceMatch?.OrderCode || chemPanelMatch?.OrderCode || nonChemMatch?.OrderCode);
-      console.log(commonSupportiveDiagnoses)
-      console.log(chemPanelMatch, "chemPanelMatch")
-      console.log(chemServiceMatch, "chemServiceMatch")
       // Find in chemPanel
 
       if (chemPanelMatch &&  resultChem) {
@@ -127,6 +124,7 @@ export class ApiTransformService {
           price: parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0,
           limitedCoverage: commonSupportiveDiagnoses,
           additionalCoverage: additionalSupportiveDiagnoses,
+          policyUrl: policyUrl,
         });
         formattedTestResults.FormattedTestResults.totalPrice += parseFloat(nonChemMatch['PatientFeeInfo']?.EstFee) || 0;
       }

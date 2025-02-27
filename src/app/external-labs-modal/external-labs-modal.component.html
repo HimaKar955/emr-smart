@@ -270,8 +270,13 @@
    </app-review-confirm>
  </ng-container>
   </ng-container>
- <ng-container *ngIf="showSelectDiagnosis">
-     <app-select-diagnosis [limitedCoverage]="limitedCoverage" [additionalSupportiveDiagnosis]="additionalSupportiveDiagnosis" [policyUrl]="policyUrl"></app-select-diagnosis>
+  <ng-container *ngIf="showSelectDiagnosis">
+    <app-select-diagnosis 
+      [limitedCoverage]="limitedCoverage" 
+      [additionalSupportiveDiagnosis]="additionalSupportiveDiagnosis" 
+      [policyUrl]="policyUrl"
+      (close)="showSelectDiagnosis = false">
+    </app-select-diagnosis>
   </ng-container>
  </div>
  
