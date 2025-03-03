@@ -20,8 +20,8 @@ export class SelectDiagnosisComponent implements OnInit {
 
   @Input() limitedCoverage: any;
   @Input() additionalSupportiveDiagnosis: any;
-  @Input() AdditionalCoverage: any;
   @Input() policyUrl: any;
+  @Input() chemName: any;
   @Output() close = new EventEmitter<void>(); // Add this line
 
   searchTerm: string = '';

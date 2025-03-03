@@ -37,9 +37,9 @@ export class AppComponent {
     const url=new URL(this.document.location.href);
     let hookInstance=url.searchParams.get('hookInstance');
 
-    // if(!hookInstance){
-    //   this.router.navigate(['/forbidden'])
-    // }
+    if(!hookInstance){
+      this.router.navigate(['/forbidden'])
+    }
     hookInstance && this.launchDialog({hookInstance});
   }
 }

@@ -12,7 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { EmrService } from '../emr-services/emr-service/emr.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LCP_Text, PricingResponse7, PricingResponse9, ServiceResponse7, ServiceResponse9 } from '../data/utils';
+import { PricingResponse7, PricingResponse9, ServiceResponse7, ServiceResponse9 } from '../data/utils';
 import { environment } from '../../environments/environment';
 import { ApiTransformService } from '../emr-services/emr-service/converted.service';
 import { forkJoin } from 'rxjs';
@@ -44,7 +44,6 @@ export class ExternalLabsModalComponent implements OnInit {
   limitOrders: any[] = [];
   loader = false;
   finalPrice: string = '$0';
-  LCP_Text = LCP_Text;
   hookInstance: string | null = '';
   error= "";
   price: number = 0;
@@ -56,6 +55,7 @@ export class ExternalLabsModalComponent implements OnInit {
   limitedCoverage: any[] = [];
   additionalSupportiveDiagnosis: any[] = [];
   policyUrl: string | null = '';
+  chemName: string = '';
 
   formattedTestResults: any;
 
@@ -134,6 +134,7 @@ export class ExternalLabsModalComponent implements OnInit {
     this.limitedCoverage = chem?.limitedCoverage;
     this.additionalSupportiveDiagnosis = chem?.additionalCoverage;
     this.policyUrl = chem?.policyUrl;
+    this.chemName = chem?.chemName;
     this.showSelectDiagnosis = true;
   }
 }

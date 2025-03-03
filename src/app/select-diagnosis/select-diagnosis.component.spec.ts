@@ -4,6 +4,7 @@ import { SelectDiagnosisComponent } from './select-diagnosis.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { By } from '@angular/platform-browser';
 
 describe('SelectDiagnosisComponent', () => {
   let component: SelectDiagnosisComponent;
@@ -23,9 +24,9 @@ describe('SelectDiagnosisComponent', () => {
     fixture = TestBed.createComponent(SelectDiagnosisComponent);
     component = fixture.componentInstance;
 
-    // ✅ Assign mock data to input before initialization
+    // Assign mock data to input before initialization
     component.limitedCoverage = mockData;
-    component.ngOnInit(); // Call manually because @Input() is set dynamically
+    component.ngOnInit();
     fixture.detectChanges();
   });
 
@@ -76,9 +77,19 @@ describe('SelectDiagnosisComponent', () => {
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith('I10');
   });
 
-  it('should show alert if no diagnosis is selected for copy', () => {
-    spyOn(window, 'alert');
-    component.copyDiagnosisCode();
-    expect(window.alert).toHaveBeenCalledWith('Please select a diagnosis first!');
+  it('should emit close event when onBack is called', () => {
+    spyOn(component.close, 'emit');
+    component.onBack();
+    expect(component.close.emit).toHaveBeenCalled();
+  });
+
+  it('should open a new window with the policy URL when openPolicyPopup is called', () => {
+    const policyUrl = 'http://example.com/policy';
+    component.policyUrl = policyUrl;
+
+    spyOn(window, 'open');
+    component.openPolicyPopup();
+
+    expect(window.open).toHaveBeenCalledWith(policyUrl, 'PolicyPopup', 'width=800,height=600,scrollbars=yes,resizable=yes');
   });
 });

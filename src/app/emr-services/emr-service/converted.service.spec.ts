@@ -88,6 +88,10 @@ describe('ApiTransformService', () => {
   });
 
   describe('transformResponses', () => {
+    const additionalSupportiveDiagnosis = {
+      orderCodes: []
+    };
+
     it('should transform responses correctly for chemPanelMatch with resultChem true', () => {
       const serviceResponse = {
         responseData: {
@@ -118,7 +122,7 @@ describe('ApiTransformService', () => {
       // Mock hasOrderCodesInLimitedCoverage to return true
       spyOn(service as any, 'hasOrderCodesInLimitedCoverage').and.returnValue(true);
 
-      const result = service.transformResponses(serviceResponse, pricingResponse);
+      const result = service.transformResponses(serviceResponse, pricingResponse, additionalSupportiveDiagnosis);
 
       expect(result.FormattedTestResults.tests.chems.lcplList.length).toBe(1);
       expect(result.FormattedTestResults.tests.chems.frequencyList.length).toBe(1);
@@ -145,7 +149,7 @@ describe('ApiTransformService', () => {
       // Make resultChem false by using a limitedCoverage that doesn't match
       spyOn(service as any, 'hasOrderCodesInLimitedCoverage').and.returnValue(false);
 
-      const result = service.transformResponses(serviceResponse, pricingResponse);
+      const result = service.transformResponses(serviceResponse, pricingResponse, additionalSupportiveDiagnosis);
       expect(result.FormattedTestResults.tests.chems.lcplList.length).toBe(0);
       expect(result.FormattedTestResults.tests.chems.frequencyList.length).toBe(0);
     });
@@ -168,7 +172,7 @@ describe('ApiTransformService', () => {
         },
       };
 
-      const result = service.transformResponses(serviceResponse, pricingResponse);
+      const result = service.transformResponses(serviceResponse, pricingResponse, additionalSupportiveDiagnosis);
 
       expect(result.FormattedTestResults.tests.nonChems?.length).toBe(1);
       expect(result.FormattedTestResults.tests?.nonChems[0]?.chemName).toBe('Test NonChem');
@@ -190,9 +194,69 @@ describe('ApiTransformService', () => {
         },
       };
 
-      const result = service.transformResponses(serviceResponse, pricingResponse);
+      const result = service.transformResponses(serviceResponse, pricingResponse, additionalSupportiveDiagnosis);
 
       expect(result.FormattedTestResults.tests.nonChems.length).toBe(0);
+    });
+  });
+
+  describe('getCommonSupportiveDiagnoses', () => {
+    it('should return common supportive diagnoses for a valid order code', () => {
+      const limitedCoverage = [{ orderCode: '12345', commonSupportiveDiagnoses: ['D123'] }];
+      const result = service['getCommonSupportiveDiagnoses'](limitedCoverage, '12345');
+      expect(result).toEqual(['D123']);
+    });
+
+    it('should return null for an invalid order code', () => {
+      const limitedCoverage = [{ orderCode: '12345', commonSupportiveDiagnoses: ['D123'] }];
+      const result = service['getCommonSupportiveDiagnoses'](limitedCoverage, '67890');
+      expect(result).toBeNull();
+    });
+
+    it('should return null if limitedCoverage is not an array', () => {
+      const limitedCoverage = null;
+      const result = service['getCommonSupportiveDiagnoses'](limitedCoverage, '12345');
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('getAdditionalSupportiveDiagnoses', () => {
+    it('should return additional supportive diagnoses for a valid order code', () => {
+      const additionalCoverage = [{ orderCode: '12345', additionalSupportiveDiagnoses: ['D456'] }];
+      const result = service['getAdditionalSupportiveDiagnoses'](additionalCoverage, '12345');
+      expect(result).toEqual(['D456']);
+    });
+
+    it('should return null for an invalid order code', () => {
+      const additionalCoverage = [{ orderCode: '12345', additionalSupportiveDiagnoses: ['D456'] }];
+      const result = service['getAdditionalSupportiveDiagnoses'](additionalCoverage, '67890');
+      expect(result).toBeNull();
+    });
+
+    it('should return null if additionalCoverage is not an array', () => {
+      const additionalCoverage = null;
+      const result = service['getAdditionalSupportiveDiagnoses'](additionalCoverage, '12345');
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('getPolicyUrl', () => {
+    it('should return policy URL for a valid order code', () => {
+      const limitedCoverage = [{ orderCode: '12345', policyURL: 'http://example.com/policy' }];
+      const result = service['getPolicyUrl'](limitedCoverage, '12345');
+      expect(result).toBe('http://example.com/policy');
+    });
+
+    it('should return null for an invalid order code', () => {
+      const limitedCoverage = [{ orderCode: '12345', policyURL: 'http://example.com/policy' }];
+      const result = service['getPolicyUrl'](limitedCoverage, '67890');
+      expect(result).toBeNull();
+    });
+
+    it('should return null if limitedCoverage is not an array', () => {
+      const limitedCoverage = null;
+      const result = service['getPolicyUrl'](limitedCoverage, '12345');
+      expect(result).toBeNull();
     });
   });
 });
