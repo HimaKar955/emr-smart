@@ -20,13 +20,13 @@
     <div class="search-container">
         <h1 class="title">{{chemName}}</h1>
         <div class="search-box">
-            <input type="text" class="search-input" placeholder="Search for a diagnosis" [(ngModel)]="searchTerm" (ngModelChange)="filteredCoverage()">
-            <div class="search-meta">
+          <input type="text" class="search-input" placeholder="Search for a diagnosis" [(ngModel)]="searchTerm" (ngModelChange)="filteredCoverage()">
+          <div></div>            <div class="search-meta">
                 <span class="diagnosis-count">Total results: <br>
                   {{ selectedFilter === 'limited' ? limitedCoverage?.length : additionalSupportiveDiagnosis?.length }}
                   possible diagnoses.</span>
                 <div class="filter-options">
-                  <button class="filter-btn active" (click)="selectedFilter = 'limited'; filteredCoverage()">Commonly Used</button>
+                  <button class="filter-btn" [ngClass]="{'--primary': selectedFilter==='limited','--secondary': selectedFilter!=='limited'}" (click)="selectedFilter = 'limited'; filteredCoverage()">Commonly Used</button>
                   <button class="filter-btn" (click)="selectedFilter = 'all'; filteredCoverage()">All</button>                  
                 </div>
             </div>
