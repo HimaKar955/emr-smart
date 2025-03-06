@@ -12,72 +12,83 @@
   <div class="content">
     <div class="info-text">
       <h2 class="title">Confirm Diagnosis</h2>
-      <p>
-          The insurance carrier’s policy includes the following diagnoses that COULD potentially support medical necessity.
-          The selected diagnosis code must be applicable to the patient’s symptoms or conditions.
+      <p style="font-size: 16px;">
+        The insurance carrier's policy includes the following diagnoses that <b>could</b> potentially support medical
+        necessity. The selected diagnosis code must be applicable to the patient’s symptoms or conditions.
       </p>
     </div>
     <div class="search-container">
-        <h1 class="title">{{chemName}}</h1>
-        <div class="search-box">
-          <input type="text" class="search-input" placeholder="Search for a diagnosis" [(ngModel)]="searchTerm" (ngModelChange)="filteredCoverage()">
-          <div></div>            <div class="search-meta">
-                <span class="diagnosis-count">Total results: <br>
-                  {{ selectedFilter === 'limited' ? limitedCoverage?.length : additionalSupportiveDiagnosis?.length }}
-                  possible diagnoses.</span>
-                <div class="filter-options">
-                  <button class="filter-btn" [ngClass]="{'--primary': selectedFilter==='limited','--secondary': selectedFilter!=='limited'}" (click)="selectedFilter = 'limited'; filteredCoverage()">Commonly Used</button>
-                  <button class="filter-btn" (click)="selectedFilter = 'all'; filteredCoverage()">All</button>                  
-                </div>
-            </div>
+      <h1 class="title">{{chemName}}</h1>
+      <div class="search-box">
+        <div class="ds-input --icons --icon-left">
+          <div class="ds-flex --start-center --row">
+            <span class="ds-icon--search --left" aria-label="search"></span>
+            <input class="search-input" type="text" id="label" [(ngModel)]="searchTerm"
+              (ngModelChange)="filteredCoverage()" />
+          </div>
+          <label class="ds-input__label" for="label" aria-label="Static Input">
+            <span style="color:#646464">Search for a diagnosis</span>
+          </label>
         </div>
+        <!-- <input type="text" class="search-input" placeholder="Search for a diagnosis" [(ngModel)]="searchTerm" (ngModelChange)="filteredCoverage()"> -->
+        <div class="search-meta">
+          <div class="diagnosis-count"><span style="font-size: 12px">Total results</span><br>
+           <b> {{ selectedFilter === 'limited' ? limitedCoverage?.length : additionalSupportiveDiagnosis?.length }}
+            possible diagnoses</b></div>
+          <div class="filter-options">
+            <label style="font-size: 12px">Filters</label>
+            <div class="ds-flex">
+              <button class="ds-button commonly-btn"
+                [ngClass]="{'--primary blue-color': selectedFilter==='limited','--secondary': selectedFilter!=='limited'}"
+                aria-label="button text" (click)="selectedFilter = 'limited'; filteredCoverage()">Commonly Used
+              </button>
+              <button class="ds-button all-btn"
+                [ngClass]="{'--primary blue-color': selectedFilter==='all','--secondary': selectedFilter!=='all'}"
+                aria-label="button text" (click)="selectedFilter = 'all'; filteredCoverage()">All
+
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <mat-dialog-content class="ds-col-12 dialog-content scrollable-content">
-        <table class="diagnosis-table">
-        <thead>
-          <tr class="diagnosis-header">
-            
-            <th class="column-header" (click)="toggleSortDesc()">
-              Description
-              <span *ngIf="descIsAscending">↑</span>
-              <span *ngIf="!descIsAscending">↓</span>
-            </th>
-            <th class="column-header" 
-            (click)="toggleSortCode()"
-            >ICD-10 Code
-                <span *ngIf="codeIsAscending">↑</span>
-              <span *ngIf="!codeIsAscending">↓</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr class="diagnosis-row" 
-            *ngFor="let test of filteredData" 
-            [class.selected]="selectedDiagnosis === test"
-            (click)="selectDiagnosis(test)">
-                <td class="diagnosis-name">{{ test.description }}</td>
-                <td class="diagnosis-code">{{ test.code }}</td>
-            </tr>
-        </tbody>
-        </table>
-    </mat-dialog-content>
-    
+    <table class="ds-table --sortable">
+      <thead>
+        <tr class="ds-table__head">
+          <th class="ds-table__head-th" (click)="toggleSortDesc()">Description</th>
+          <th class="ds-table__head-th" style="text-align: right;" (click)="toggleSortCode()">ICD-10 Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ds-table__row" *ngFor="let test of filteredData" [class.selected]="selectedDiagnosis === test" (click)="selectDiagnosis(test)">
+          <td class="ds-table__row-td">
+            <div class="ds-input__radio">
+              <input type="radio" name="radio" id="label-{{test.code}}" value="label">
+              <label for="label-{{test.code}}">{{ test.description }}</label>
+            </div>
+          </td>
+          <td class="ds-table__row-td" style="text-align: right;">
+            <span>{{ test.code }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
 
     <!-- Acknowledgment & Policy -->
     <p class="policy-text">
-      Limited Coverage Policy has been acknowledged. 
+      Limited Coverage Policy has been acknowledged.
       <a href="javascript:void(0)" class="review-link" (click)="openPolicyPopup()">Review Policy</a>
+      <br><br>
+      After copying the diagnosis, click the “X” button to return to Epic and add the diagnosis to the patient’s chart.
     </p>
-      
 
     <!-- Buttons -->
     <div class="buttons">
-        <button class="btn back-btn" (click)="onBack()">Back</button> <!-- Call onBack() -->
-        <button type="button" class="btn primary-btn" 
-                [disabled]="!selectedDiagnosis" 
-                (click)="copyDiagnosisCode()">
-          Copy Diagnosis and Close
-        </button>
+      <button class="ds-button --ghost --small" (click)="onBack()">Back</button> <!-- Call onBack() -->
+      <button type="button" class="ds-button --primary" [ngClass]="{'--disabled': !selectedDiagnosis}"
+        (click)="copyDiagnosisCode()">
+        Copy Diagnosis and Close
+      </button>
     </div>
   </div>
-</div>

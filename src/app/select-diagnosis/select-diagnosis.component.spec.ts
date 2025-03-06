@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { SelectDiagnosisComponent } from './select-diagnosis.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
+import { SelectDiagnosisComponent } from './select-diagnosis';
 
 describe('SelectDiagnosisComponent', () => {
   let component: SelectDiagnosisComponent;

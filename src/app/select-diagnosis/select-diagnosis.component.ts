@@ -20,9 +20,10 @@ export class SelectDiagnosisComponent implements OnInit {
 
   @Input() limitedCoverage: any;
   @Input() additionalSupportiveDiagnosis: any;
+  @Input() AdditionalCoverage:any;
   @Input() policyUrl: any;
-  @Input() chemName: any;
   @Output() close = new EventEmitter<void>(); // Add this line
+  @Input() chemName: any;
 
   searchTerm: string = '';
   filteredData: any;
@@ -38,12 +39,14 @@ export class SelectDiagnosisComponent implements OnInit {
   // Filter the data based on the search term
   filteredCoverage() {
     let dataToFilter = this.limitedCoverage; // Default to limited coverage
-
+    console.log(this.limitedCoverage,"COMMON");
+    console.log(this.additionalSupportiveDiagnosis,"ALL");
+  
     // Check if "All" is selected, then use additionalSupportiveDiagnosis
     if (this.selectedFilter === 'all' && this.additionalSupportiveDiagnosis) {
       dataToFilter = this.additionalSupportiveDiagnosis;
     }
-
+  
     if (this.searchTerm) {
       this.filteredData = dataToFilter.filter((test: { description: string; code: string; }) =>
         test.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -53,6 +56,7 @@ export class SelectDiagnosisComponent implements OnInit {
       this.filteredData = dataToFilter; // Reset to full list if no search term
     }
   }
+  
 
   // Toggle sorting for ICD-10 code
   toggleSortCode() {
@@ -92,8 +96,6 @@ export class SelectDiagnosisComponent implements OnInit {
       });
     }
   }
-
-  // Emit the close event when the back button is clicked
   onBack() {
     this.close.emit(); // Emit the event
   }
