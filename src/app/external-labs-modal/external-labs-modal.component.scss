@@ -1,298 +1,319 @@
 .dialog-header-container {
-    padding: 24px;
-    margin-bottom: 4px;
-  
-    .dialog-header {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid lightgrey;
-      padding-bottom: 1rem;
-    }
-  }
-  
-  ::ng-deep .mat-mdc-dialog-container-with-actions .mat-mdc-dialog-content {
-    padding: var(--mat-dialog-with-actions-content-padding, 0 24px);
-    padding-top: 0px;
-  }
-  
-  .dialog {
-    padding: 24px;
-  }
-  
-  .diagnosis-header {
+  padding: 24px;
+  margin-bottom: 4px;
+
+  .dialog-header {
     display: flex;
     justify-content: space-between;
-  
-    .label-heading {
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 27.54px;
-      color: black;
-  
-      &:nth-child(2) {
-        font-size: 18px;
-        font-weight: 500;
-      }
-    }
-  
-    .price-text {
-      margin-left: 2.5rem;
-    }
-  }
-  
-  .order-text {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 25.6px;
-  }
-  
-  .order-name {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 25.6px;
-    margin-left: 0 !important;
-  }
-  
-  .flex-class {
-    display: flex;
-    // gap: 24px;
-    margin-top: 0.5rem;
-  
-    @extend .order-text;
-    @extend .order-name;
-  }
-  
-  .alert-text {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 25.6px;
-    color: #151515;
-    margin-bottom: 4px;
-  }
-  
-  .alert-text + .order-text {
-    margin-top: 4px;
-  }
-  
-  .error-header {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 32px;
-    text-align: left;
-    margin-bottom: 0.5rem;
-  }
-  
-  .error-text {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 25.6px;
-    text-align: left;
-  }
-  
-  .alert-icon {
-    &::before {
-      color: #e00028;
-      margin-right: 1rem;
-    }
-  }
-  
-  .dialog-content {
-    border-radius: 8px;
-    margin-top: 0;
-    max-height: 350px;
-  
-    .test-heading {
-      margin-bottom: 8px;
-      font-weight: 700;
-      line-height: 32px;
-    }
-  
-    .lcp-text {
-      color: black;
-    }
-  
-    .no-border {
-      border: none !important;
-      color: #151515;
-      font-family: Roboto;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 25.6px;
-      text-align: left;
-    }
-  
-    .dialog-container {
-      border: 1px solid #d1d1d1;
-      border-radius: 8px;
-      margin: 0 !important;
-    }
-  }
-  
-  .diagnosis-details {
-    display: flex;
-    flex-direction: column;
     border-bottom: 1px solid lightgrey;
-    padding: 16px;
-  
-    &:last-child {
-      border-bottom: none;
-    }
-  
-    @extend .diagnosis-header;
-  
-    .frequency-limit {
-      background: #f9fbfe;
-      border: 1px solid #2769dd;
-      padding: 1rem;
-      border-radius: 0.25rem;
-      margin-top: 8px;
-  
-      @extend .alert-text;
-      @extend .alert-icon;
-    }
-  
-    .lcp-bg-color {
-      background: #fffcfc;
-      border: 1px solid #e00028;
-      border-radius: 0.25rem;
-      padding: 1rem;
-      margin-top: 8px;
-  
-      @extend .alert-text;
-      @extend .alert-icon;
-    }
-  
-    .diagnosis-codes {
-      span {
-        // color: black;
-  
-        &:nth-child(2) {
-          margin-left: 24px;
-        }
-      }
-    }
-  
-    .diagnosis-review-button {
-      margin-top: 0.8гem;
-      margin-left: 2.5rem;
-    }
+    padding-bottom: 1rem;
   }
-  
-  .photo-section {
-    box-shadow: 0px -4px 4px -2px #18274b0f;
-  }
-  
-  .review-button {
-    padding: 6px 16px 6px 16px;
-    border-radius: 4px;
-    border: 1px solid #35792a;
-    background: #fff;
-    margin-top: 4px;
-  
-    &:hover {
-      .button-text {
-        color: #fff;
-      }
-    }
-  
-    .button-text {
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 18px;
-      letter-spacing: -0.01em;
-      text-align: center;
-      color: #35792a;
-    }
-  }
-  
-  .total-section {
-    font-family: Roboto;
-    font-size: 20px;
+}
+
+::ng-deep .mat-mdc-dialog-container-with-actions .mat-mdc-dialog-content {
+  padding: var(--mat-dialog-with-actions-content-padding, 0 24px);
+  padding-top: 0px;
+}
+
+.dialog {
+  padding: 24px;
+}
+
+.diagnosis-header {
+  display: flex;
+  justify-content: space-between;
+
+  .label-heading {
+    font-size: 18px;
     font-weight: 700;
-    padding-top: 24px;
+    line-height: 27.54px;
+    color: black;
+
+    &:nth-child(2) {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+
+  .price-text {
+    margin-left: 2.5rem;
+  }
+}
+
+.order-text {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25.6px;
+}
+
+.order-name {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 25.6px;
+  margin-left: 0 !important;
+}
+
+.flex-class {
+  display: flex;
+  // gap: 24px;
+  margin-top: 0.5rem;
+
+  @extend .order-text;
+  @extend .order-name;
+}
+
+.alert-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25.6px;
+  color: #151515;
+  margin-bottom: 4px;
+}
+
+.alert-text+.order-text {
+  margin-top: 4px;
+}
+
+.error-header {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.error-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25.6px;
+  text-align: left;
+}
+
+.alert-icon {
+  &::before {
+    color: #e00028;
+    margin-right: 1rem;
+  }
+}
+
+.dialog-content {
+  border-radius: 8px;
+  margin-top: 0;
+  max-height: 350px;
+
+  .test-heading {
+    margin-bottom: 8px;
+    font-weight: 700;
     line-height: 32px;
-    text-align: left;
-    border-radius: 0px 0px 8px 8px;
-    box-shadow: 0px -4px 4px -2px rgba(24, 39, 75, 0.06),
-      0px -4px 4px -2px rgba(24, 39, 75, 0.06);
-    padding-left: 24px;
   }
-  
-  .diagnosis-estimated-price {
-    background-color: #fafafa;
-    padding: 16px;
-    margin: 24px;
-    border: 1px solid #d1d1d1;
-    border-radius: 8px;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    height: 70px;
-    margin-top: 8px;
-  
-    @extend .diagnosis-header;
-  }
-  
-  .dialog-text {
-    padding: 0 24px;
-    font-size: 0.875rem;
-    line-height: 154%;
-  }
-  
-  h2 {
-    margin: 0;
+
+  .lcp-text {
     color: black;
   }
-  
-  .empty-text {
-    padding: 0 1rem 1rem 1rem;
-  }
-  
-  ::ng-deep .ds-modal_header {
-    right: 12px;
-  }
-  
-  ::ng-deep .ds-modal_actions {
-    padding: 0 16px 16px;
-  }
-  
-  .mat-button {
-    margin: 24px;
-  }
-  
-  .bottom-text {
-    //styleName: Body/Small/Regular;
+
+  .no-border {
+    border: none !important;
+    color: #151515;
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 21.56px;
+    line-height: 25.6px;
     text-align: left;
-    color: #646464 !important;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    padding-bottom: 16px;
-    margin-left: 16px;
+  }
+
+  .dialog-container {
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    margin: 0 !important;
+  }
+}
+
+.diagnosis-details {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid lightgrey;
+  padding: 16px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  @extend .diagnosis-header;
+
+  .frequency-limit {
+    background: #f9fbfe;
+    border: 1px solid #2769dd;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-top: 8px;
+
+    @extend .alert-text;
+    @extend .alert-icon;
+  }
+
+  .lcp-bg-color {
+    background: #fffcfc;
+    border: 1px solid #e00028;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-top: 8px;
+
+    @extend .alert-text;
+    @extend .alert-icon;
+  }
+
+  .diagnosis-codes {
+    span {
+      // color: black;
+
+      &:nth-child(2) {
+        margin-left: 24px;
+      }
+    }
+  }
+
+  .diagnosis-review-button {
+    margin-top: 0.8гem;
+    margin-left: 2.5rem;
+  }
+}
+
+.photo-section {
+  box-shadow: 0px -4px 4px -2px #18274b0f;
+}
+
+.review-button {
+  padding: 6px 16px 6px 16px;
+  border-radius: 4px;
+  border: 1px solid #35792a;
+  background: #fff;
+  margin-top: 4px;
+
+  &:hover {
+    .button-text {
+      color: #fff;
+    }
+  }
+
+  .button-text {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: #35792a;
+  }
+}
+
+.total-section {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 700;
+  padding-top: 24px;
+  line-height: 32px;
+  text-align: left;
+  border-radius: 0px 0px 8px 8px;
+  box-shadow: 0px -4px 4px -2px rgba(24, 39, 75, 0.06),
+    0px -4px 4px -2px rgba(24, 39, 75, 0.06);
+  padding-left: 24px;
+}
+
+.diagnosis-estimated-price {
+  background-color: #fafafa;
+  padding: 16px;
+  margin: 24px;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 70px;
+  margin-top: 8px;
+
+  @extend .diagnosis-header;
+}
+
+.dialog-text {
+  padding: 0 24px;
+  font-size: 0.875rem;
+  line-height: 154%;
+}
+
+h2 {
+  margin: 0;
+  color: black;
+}
+
+.empty-text {
+  padding: 0 1rem 1rem 1rem;
+}
+
+::ng-deep .ds-modal_header {
+  right: 12px;
+}
+
+::ng-deep .ds-modal_actions {
+  padding: 0 16px 16px;
+}
+
+.mat-button {
+  margin: 24px;
+}
+
+.bottom-text {
+  //styleName: Body/Small/Regular;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21.56px;
+  text-align: left;
+  color: #646464 !important;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  padding-bottom: 16px;
+  margin-left: 16px;
 }
 
 td {
 
   padding-left: 24px;
-  
-  }
-  
-  td:first-child {
+
+}
+
+td:first-child {
   padding-left: 0px;
-  }
-  
-  table{
-  border-collapse: collapse; 
+}
+
+table {
+  border-collapse: collapse;
   width: 100%;
-  }
-  
-  tbody tr:not(:first-child){ 
+}
+
+tbody tr:not(:first-child) {
   margin-top: 8px;
-  }
-  
-  td{
-  padding: 8px;
-  }
+}
+
+td {
+  padding: 8px;
+}
+
+.review-link {
+  color: black;
+  font-weight: bold;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25.6px;
+  letter-spacing: 0%;
+  text-decoration: underline;
+}
+
+.medicare-coverage-link {
+  color: #35792A;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25.6px;
+  letter-spacing: 0%;
+  text-decoration: underline;
+}

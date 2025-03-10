@@ -58,7 +58,7 @@ export class ExternalLabsModalComponent implements OnInit {
   chemName: string = '';
 
   formattedTestResults: any;
-
+  expand = false;
   constructor(
     private emrService: EmrService,
     private apiTransformService: ApiTransformService,
@@ -102,7 +102,8 @@ export class ExternalLabsModalComponent implements OnInit {
 
     //     const formattedData = this.apiTransformService.transformResponses(
     //       this.serviceResponse,
-    //       this.pricingResponse
+    //       this.pricingResponse,
+    //       additionalSupportiveDiagnosis
     //     );
 
     //     this.formattedTestResults = formattedData?.FormattedTestResults;
@@ -136,6 +137,27 @@ export class ExternalLabsModalComponent implements OnInit {
     this.policyUrl = chem?.policyUrl;
     this.chemName = chem?.chemName;
     this.showSelectDiagnosis = true;
+  }
+
+  openPolicyPopup(policyUrl: any) {
+    window.open(policyUrl, 'PolicyPopup', 'width=800,height=600,scrollbars=yes,resizable=yes');
+  }
+
+  toggleExpand() {
+    this.expand = !this.expand;
+  }
+
+  hasLcpAlert(): boolean {
+    // Check nonChems for LCP alert
+    const nonChemsHasLcp = this.formattedTestResults?.tests?.nonChems?.some(
+      (nonChem: any) => nonChem.coveredByDiagnosis
+    );
+  
+    // Check chems for LCP alert
+    const chemsHasLcp = this.formattedTestResults?.tests?.chems?.lcplList?.length > 0;
+  
+    // Return true if either nonChems or chems has an LCP alert
+    return nonChemsHasLcp || chemsHasLcp;
   }
 }
 
